@@ -11,7 +11,7 @@ angular.module('bcc').directive('pager', function(){
     },
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($scope){
+		controller: ['$scope', function($scope){
       this.pages = [];
       this.totalPage = 1;
 
@@ -30,6 +30,6 @@ angular.module('bcc').directive('pager', function(){
 
       // Initialization.
       $scope.$on('add.registration', this.addDone.bind(this));
-    }
+    }]
 	};
 });

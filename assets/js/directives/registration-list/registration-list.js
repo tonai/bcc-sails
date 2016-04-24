@@ -7,7 +7,7 @@ angular.module('bcc').directive('registrationList', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($rootScope, $scope, registrationService, helperService){
+		controller: ['$rootScope', '$scope', 'registrationService', 'helperService', function($rootScope, $scope, registrationService, helperService){
       this.registrations = [];
       this.current = 0;
       this.limit = 10;
@@ -56,6 +56,6 @@ angular.module('bcc').directive('registrationList', function(){
 
       // Initialization.
       this.registrations = helperService.objectToArray(registrationService.findAll());
-		}
+		}]
 	};
 });

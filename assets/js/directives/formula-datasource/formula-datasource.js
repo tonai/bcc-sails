@@ -9,7 +9,7 @@ angular.module('bcc').directive('formulaDatasource', function(){
 		},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($injector){
+		controller: function(){
       var labels = {
         young: 'Jeune',
         adult: 'Adulte'

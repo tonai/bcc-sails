@@ -1,4 +1,4 @@
-angular.module('bcc').factory('registrationService', function($rootScope, $q, $http){
+angular.module('bcc').factory('registrationService', ['$rootScope', '$q', '$http', function($rootScope, $q, $http){
   'use strict';
 
   var registrations = {};
@@ -153,4 +153,4 @@ angular.module('bcc').factory('registrationService', function($rootScope, $q, $h
   });
 
 	return api;
-});
+}]);

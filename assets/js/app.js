@@ -12,7 +12,7 @@ angular
   .module('bcc', [
     'ngRoute'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/js/controllers/main/main.html',
@@ -32,4 +32,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);

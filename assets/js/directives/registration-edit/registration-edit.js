@@ -9,7 +9,7 @@ angular.module('bcc').directive('registrationEdit', function(){
     },
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($rootScope, $scope, registrationService){
+		controller: ['$rootScope', '$scope', 'registrationService', function($rootScope, $scope, registrationService){
       this.registration = registrationService.findOne(this.id);
 
       if (!this.registration) {
@@ -33,6 +33,6 @@ angular.module('bcc').directive('registrationEdit', function(){
           // Warning data has been updated !
         }
       }.bind(this));
-		}
+		}]
 	};
 });

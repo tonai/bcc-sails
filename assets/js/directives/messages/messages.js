@@ -7,7 +7,7 @@ angular.module('bcc').directive('messages', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($scope){
+		controller: ['$scope', function($scope){
       this.messages = [];
 
       // type: success, info, warning, danger
@@ -23,6 +23,6 @@ angular.module('bcc').directive('messages', function(){
 
       // Initialization.
       $scope.$on('message', this.addMessage.bind(this));
-    }
+    }]
 	};
 });

@@ -7,6 +7,6 @@
  * # RegistrationEditCtrl
  * Controller of the bcc app
  */
-angular.module('bcc').controller('RegistrationEditCtrl', function ($route) {
+angular.module('bcc').controller('RegistrationEditCtrl', ['$route', function ($route) {
   this.registrationId = $route.current.params.id;
-});
+}]);

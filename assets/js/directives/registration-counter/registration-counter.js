@@ -7,7 +7,7 @@ angular.module('bcc').directive('registrationCounter', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($scope, registrationService){
+		controller: ['$scope', 'registrationService', function($scope, registrationService){
       var registrations, i;
       this.counters = {};
 
@@ -69,6 +69,6 @@ angular.module('bcc').directive('registrationCounter', function(){
       for (i in registrations) {
         this.addDone(null, registrations[i]);
       }
-		}
+		}]
 	};
 });

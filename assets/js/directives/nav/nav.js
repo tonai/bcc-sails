@@ -7,13 +7,13 @@ angular.module('bcc').directive('nav', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($scope, $route){
+		controller: ['$scope', '$route', function($scope, $route){
       this.currentPath = $route.current.$$route.originalPath;
 
       // Bind.
       $scope.$on('$locationChangeSuccess', function(event) {
         this.currentPath = $route.current.$$route.originalPath;
       }.bind(this));
-		}
+		}]
 	};
 });

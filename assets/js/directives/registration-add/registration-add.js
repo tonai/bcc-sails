@@ -7,7 +7,7 @@ angular.module('bcc').directive('registrationAdd', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: function($rootScope, registrationService){
+		controller: ['$rootScope', 'registrationService', function($rootScope, registrationService){
 
       this.add = function(newRegistration){
         registrationService.add(newRegistration).then(function(){
@@ -19,6 +19,6 @@ angular.module('bcc').directive('registrationAdd', function(){
         });
       }
 
-		}
+		}]
 	};
 });
