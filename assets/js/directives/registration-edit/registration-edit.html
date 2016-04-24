@@ -1,0 +1,30 @@
+<formula-datasource formulas="formulas" categories="categories"></formula-datasource>
+<form id="registration-edit" ng-submit="ctrl.edit(ctrl.registration)">
+	<div class="form-group">
+    <label for="registerEditCategory">Catégorie d'inscription</label>
+		<select class="form-control" id="registerEditCategory" name="registerEditCategory" ng-model="ctrl.registration.category" ng-change="ctrl.registration.formula = ''" required>
+      <option></option>
+      <option value="young">Jeune</option>
+      <option value="adult">Adulte</option>
+    </select>
+	</div>
+	<div class="form-group">
+    <label for="registerEditFormula">Formule</label>
+		<select class="form-control" id="registerEditFormula" name="registerEditFormula" ng-model="ctrl.registration.formula" required>
+      <option></option>
+      <option ng-repeat="formula in formulas" value="{{::formula.id}}" ng-show="ctrl.registration.category==formula.category">
+        {{::formula.id}}: {{::formula.label}}
+      </option>
+    </select>
+	</div>
+	<div class="form-group">
+    <label for="registerEditLastname">Nom</label>
+		<input type="text" class="form-control" id="registerEditLastname" name="registerEditLastname" ng-model="ctrl.registration.lastname" required>
+	</div>
+	<div class="form-group">
+    <label for="registerEditFirstname">Prénom</label>
+		<input type="text" class="form-control" id="registerEditFirstname" name="registerEditFirstname" ng-model="ctrl.registration.firstname" required>
+	</div>
+	<button type="submit" class="btn btn-primary">Modifier l'inscription</button>
+	<a href="#/registrations" class="btn btn-warning">Retour</a>
+</form>

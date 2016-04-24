@@ -1,0 +1,84 @@
+<div class="registration-counter">
+  <formula-datasource formulas="ctrl.formulas" categories="ctrl.categories"></formula-datasource>
+  <div class="registration-counter__panel">
+    <div class="registration-counter__box panel panel-default" ng-repeat="formula in ctrl.formulas | filter:{category:'young'}" id="panel-{{::formula.id}}">
+      <div class="panel-heading">
+        <span title="{{::formula.label}}">{{::formula.id}}</span>
+      </div>
+      <div class="panel-body">
+        <div class="progress">
+          <span class="badge">{{ctrl.counters[formula.id] || 0}} / {{::formula.limit}}</span>
+          <div
+            class="progress-bar progress-bar-success"
+            ng-class="{'progress-bar-warning': (ctrl.counters[formula.id] || 0) / formula.limit > 0.5,
+                       'progress-bar-danger': (ctrl.counters[formula.id] || 0) / formula.limit > 0.8}"
+            role="progressbar"
+            aria-valuenow="{{ctrl.counters[formula.id] || 0}}"
+            aria-valuemin="0"
+            aria-valuemax="{{::formula.limit}}"
+            style="width: {{(ctrl.counters[formula.id] || 0) / formula.limit * 100}}%"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="registration-counter__box registration-counter__box--total panel panel-default">
+      <div class="panel-heading">
+        <span title="Total jeunes">Total J</span>
+      </div>
+      <div class="panel-body">
+        <div class="progress">
+          <span class="badge">{{ctrl.counters.young || 0}} / {{::ctrl.categories.young.limit}}</span>
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-valuenow="{{ctrl.counters.young || 0}}"
+            aria-valuemin="0"
+            aria-valuemax="{{::ctrl.categories.young.limit}}"
+            style="width: {{(ctrl.counters.young || 0) / ctrl.categories.young.limit * 100}}%"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="registration-counter__panel">
+    <div class="registration-counter__box panel panel-default" ng-repeat="formula in ctrl.formulas | filter:{category:'adult'}" id="panel-{{::formula.id}}">
+      <div class="panel-heading">
+        <span title="{{::formula.label}}">{{::formula.id}}</span>
+      </div>
+      <div class="panel-body">
+        <div class="progress">
+          <span class="badge">{{ctrl.counters[formula.id] || 0}} / {{::formula.limit}}</span>
+          <div
+            class="progress-bar progress-bar-success"
+            ng-class="{'progress-bar-warning': (ctrl.counters[formula.id] || 0) / formula.limit > 0.5,
+                       'progress-bar-danger': (ctrl.counters[formula.id] || 0) / formula.limit > 0.8}"
+            role="progressbar"
+            aria-valuenow="{{ctrl.counters[formula.id] || 0}}"
+            aria-valuemin="0"
+            aria-valuemax="{{::formula.limit}}"
+            style="width: {{(ctrl.counters[formula.id] || 0) / formula.limit * 100}}%"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="registration-counter__box registration-counter__box--total panel panel-default">
+      <div class="panel-heading">
+        <span title="Total adultes">Total A</span>
+      </div>
+      <div class="panel-body">
+        <div class="progress">
+          <span class="badge">{{ctrl.counters.adult || 0}} / {{::ctrl.categories.adult.limit}}</span>
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-valuenow="{{ctrl.counters.adult || 0}}"
+            aria-valuemin="0"
+            aria-valuemax="{{::ctrl.categories.adult.limit}}"
+            style="width: {{(ctrl.counters.adult || 0) / ctrl.categories.adult.limit * 100}}%"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

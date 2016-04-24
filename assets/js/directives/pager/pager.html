@@ -1,0 +1,18 @@
+<div class="btn-group">
+  <button
+    class="btn btn-default"
+    ng-click="ctrl.paginate(ctrl.current - 1)"
+    ng-disabled="ctrl.current == 0"
+  >Précédent</button>
+  <button
+    class="btn btn-default"
+    ng-repeat="page in ctrl.pages"
+    ng-click="ctrl.paginate(page - 1)"
+    ng-class="{'active': ctrl.current == page - 1}"
+  >{{::page}}</button>
+  <button
+    class="btn btn-default"
+    ng-click="ctrl.paginate(ctrl.current + 1)"
+    ng-disabled="ctrl.current == ctrl.totalPage - 1"
+  >Suivant</button>
+</div>

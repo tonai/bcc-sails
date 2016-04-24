@@ -1,0 +1,59 @@
+<div class="registration-list">
+  <formula-datasource formulas="ctrl.formulas" categories="ctrl.categories"></formula-datasource>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>
+          <label for="categoryFilter">Catégorie</label>
+      		<select class="form-control" id="categoryFilter" name="categoryFilter" ng-model="ctrl.categoryFilter">
+            <option></option>
+            <option value="young">Jeune</option>
+            <option value="adult">Adulte</option>
+          </select>
+        </th>
+        <th>
+          <label for="formulaFilter">Formule</label>
+      		<select class="form-control" id="formulaFilter" name="formulaFilter" ng-model="ctrl.formulaFilter">
+            <option></option>
+            <option ng-repeat="formula in ctrl.formulas" value="{{::formula.id}}">{{::formula.id}}</option>
+          </select>
+        </th>
+        <th>
+          <label for="firstnameFilter">Prénom</label>
+          <input class="form-control" id="firstnameFilter" name="firstnameFilter" ng-model="ctrl.firstnameFilter" />
+        </th>
+        <th>
+          <label for="lastnameFilter">Nom</label>
+          <input class="form-control" id="lastnameFilter" name="lastnameFilter" ng-model="ctrl.lastnameFilter" />
+        </th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="registration in ctrl.registrations
+        | filter:{category:ctrl.categoryFilter, formula:ctrl.formulaFilter, firstname:ctrl.firstnameFilter, lastname:ctrl.lastnameFilter}
+        | limitTo:ctrl.limit:ctrl.current*ctrl.limit track by registration.id"
+        ng-class="{danger: registration.offline}"
+      >
+        <td>{{::ctrl.categories[registration.category].label}}</td>
+        <td title="{{::ctrl.getFormulaLabel(registration.formula)}}">{{::registration.formula}}</td>
+        <td>{{::registration.firstname}}</td>
+        <td>{{::registration.lastname}}</td>
+        <td>
+          <div class="btn-group actions">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#/registration/{{::registration.id}}">Modifier</a></li>
+              <li><a ng-click="ctrl.remove(registration)">Supprimer</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pager current="ctrl.current" total="ctrl.registrations.length" limit="ctrl.limit"></pager>
+</div>

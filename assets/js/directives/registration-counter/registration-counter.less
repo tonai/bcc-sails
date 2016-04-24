@@ -1,0 +1,95 @@
+.registration-counter__panel {
+  display: table;
+  width: 100%;
+
+  &:last-child {
+    margin-bottom: 20px;
+
+    .registration-counter__box {
+      &:first-child {
+        border-radius: 0 0 0 5px;
+
+        .panel-heading {
+          border-radius: 0;
+        }
+      }
+
+      &:last-child  {
+        border-radius: 0 0 5px 0;
+
+        .panel-heading {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+
+  .registration-counter__box {
+    border-radius: 0;
+
+    &:first-child {
+      border-radius: 5px 0 0 0;
+
+      .panel-heading {
+        border-radius: 5px 0 0 0;
+      }
+    }
+
+    &:last-child  {
+      border-radius: 0 5px 0 0;
+
+      .panel-heading {
+        border-radius: 0 5px 0 0;
+      }
+    }
+  }
+}
+
+.registration-counter__box {
+  display: table-cell;
+  margin: 0;
+
+  .panel-heading {
+    border-radius: 0;
+    padding: 5px;
+    text-align: center;
+    transition: background-color 1s;
+
+    .highlight-info & {
+      background-color: #5cb85c;
+      transition: none;
+    }
+
+    .highlight-warning & {
+      background-color: #f0ad4e;
+      transition: none;
+    }
+
+    .highlight-danger & {
+      background-color: #d9534f;
+      transition: none;
+    }
+  }
+
+  .panel-body {
+    padding: 5px;
+    text-align: center;
+
+    > .progress {
+      margin: 0;
+      position: relative;
+      height: 30px;
+
+      > .badge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.registration-counter__box--total {
+  width: 100px;
+}
