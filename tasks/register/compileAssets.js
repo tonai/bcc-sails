@@ -13,6 +13,7 @@
  */
 module.exports = function(grunt) {
   grunt.registerTask('compileAssets', [
+    'html2js',
     'clean:dev',
     'jst:dev',
     'less:dev',

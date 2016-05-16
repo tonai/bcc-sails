@@ -3,7 +3,7 @@ angular.module('bcc').directive('registrationList', function(){
 
 	return {
 		restrict: 'E',
-		templateUrl : '/js/directives/registration-list/registration-list.html',
+		templateUrl : 'js/directives/registration-list/registration-list.html',
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',

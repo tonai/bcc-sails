@@ -3,7 +3,7 @@ angular.module('bcc').directive('pager', function(){
 
 	return {
 		restrict: 'E',
-		templateUrl : '/js/directives/pager/pager.html',
+		templateUrl : 'js/directives/pager/pager.html',
 		scope: {
       current: '=',
       limit: '=',

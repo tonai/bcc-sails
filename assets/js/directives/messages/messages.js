@@ -3,7 +3,7 @@ angular.module('bcc').directive('messages', function(){
 
 	return {
 		restrict: 'E',
-		templateUrl : '/js/directives/messages/messages.html',
+		templateUrl : 'js/directives/messages/messages.html',
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',

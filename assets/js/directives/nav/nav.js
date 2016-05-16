@@ -3,7 +3,7 @@ angular.module('bcc').directive('nav', function(){
 
 	return {
 		restrict: 'E',
-		templateUrl : '/js/directives/nav/nav.html',
+		templateUrl : 'js/directives/nav/nav.html',
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',

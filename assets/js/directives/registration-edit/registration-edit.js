@@ -3,7 +3,7 @@ angular.module('bcc').directive('registrationEdit', function(){
 
 	return {
 		restrict: 'E',
-		templateUrl : '/js/directives/registration-edit/registration-edit.html',
+		templateUrl : 'js/directives/registration-edit/registration-edit.html',
 		scope: {
       id: '='
     },
