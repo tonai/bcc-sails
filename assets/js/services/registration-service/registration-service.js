@@ -37,16 +37,20 @@ angular.module('bcc').factory('registrationService', ['$rootScope', '$q', '$http
   };
 
   api.update = function(registration){
-    if (!offline) {
-      return $http.put('registration/' + registration.id, registration);
+    if (!registration.id) {
+      return api.add(registration);
     } else {
-      return $q(function(resolve){
-        offlineActions.push({
-          method: 'update',
-          data: registration
+      if (!offline) {
+        return $http.put('registration/' + registration.id, registration);
+      } else {
+        return $q(function(resolve){
+          offlineActions.push({
+            method: 'update',
+            data: registration
+          });
+          resolve();
         });
-        resolve();
-      });
+      }
     }
   };
 

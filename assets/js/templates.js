@@ -1,15 +1,14 @@
-angular.module('templates-dist', ['js/controllers/main/main.html', 'js/controllers/registration-edit/registration-edit.html', 'js/controllers/registration-list/registration-list.html', 'js/directives/messages/messages.html', 'js/directives/nav/nav.html', 'js/directives/pager/pager.html', 'js/directives/registration-add/registration-add.html', 'js/directives/registration-counter/registration-counter.html', 'js/directives/registration-edit/registration-edit.html', 'js/directives/registration-list/registration-list.html']);
+angular.module('templates-dist', ['js/controllers/main/main.html', 'js/controllers/registration-edit/registration-edit.html', 'js/controllers/registration-list/registration-list.html', 'js/directives/messages/messages.html', 'js/directives/nav/nav.html', 'js/directives/pager/pager.html', 'js/directives/registration-counter/registration-counter.html', 'js/directives/registration-form/registration-form.html', 'js/directives/registration-list/registration-list.html']);
 
 angular.module("js/controllers/main/main.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("js/controllers/main/main.html",
-    "<registration-add></registration-add>\n" +
-    "\n" +
+    "<registration-form></registration-form>\n" +
     "");
 }]);
 
 angular.module("js/controllers/registration-edit/registration-edit.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("js/controllers/registration-edit/registration-edit.html",
-    "<registration-edit id=\"ctrl.registrationId\"></registration-edit>\n" +
+    "<registration-form id=\"ctrl.registrationId\"></registration-form>\n" +
     "");
 }]);
 
@@ -81,40 +80,6 @@ angular.module("js/directives/pager/pager.html", []).run(["$templateCache", func
     "    ng-disabled=\"ctrl.current == ctrl.totalPage - 1\"\n" +
     "  >Suivant</button>\n" +
     "</div>\n" +
-    "");
-}]);
-
-angular.module("js/directives/registration-add/registration-add.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("js/directives/registration-add/registration-add.html",
-    "<formula-datasource formulas=\"formulas\" categories=\"categories\"></formula-datasource>\n" +
-    "<form id=\"registration-add\" ng-submit=\"ctrl.add(ctrl.newRegistration)\">\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerAddCategory\">Catégorie d'inscription</label>\n" +
-    "		<select class=\"form-control\" id=\"registerAddCategory\" name=\"registerAddCategory\" ng-model=\"ctrl.newRegistration.category\" ng-change=\"ctrl.newRegistration.formula = ''\" required>\n" +
-    "      <option></option>\n" +
-    "      <option value=\"young\">Jeune</option>\n" +
-    "      <option value=\"adult\">Adulte</option>\n" +
-    "    </select>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerAddFormula\">Formule</label>\n" +
-    "		<select class=\"form-control\" id=\"registerAddFormula\" name=\"registerAddFormula\" ng-model=\"ctrl.newRegistration.formula\" required>\n" +
-    "      <option></option>\n" +
-    "      <option ng-repeat=\"formula in formulas\" value=\"{{::formula.id}}\" ng-show=\"ctrl.newRegistration.category==formula.category\">\n" +
-    "        {{::formula.id}}: {{::formula.label}}\n" +
-    "      </option>\n" +
-    "    </select>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerAddLastname\">Nom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerAddLastname\" name=\"registerAddLastname\" ng-model=\"ctrl.newRegistration.lastname\" required>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerAddFirstname\">Prénom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerAddFirstname\" name=\"registerAddFirstname\" ng-model=\"ctrl.newRegistration.firstname\" required>\n" +
-    "	</div>\n" +
-    "	<button type=\"submit\" class=\"btn btn-primary\">Ajouter l'inscription</button>\n" +
-    "</form>\n" +
     "");
 }]);
 
@@ -207,21 +172,21 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
     "");
 }]);
 
-angular.module("js/directives/registration-edit/registration-edit.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("js/directives/registration-edit/registration-edit.html",
+angular.module("js/directives/registration-form/registration-form.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("js/directives/registration-form/registration-form.html",
     "<formula-datasource formulas=\"formulas\" categories=\"categories\"></formula-datasource>\n" +
-    "<form id=\"registration-edit\" ng-submit=\"ctrl.edit(ctrl.registration)\">\n" +
+    "<form id=\"registration-form\" ng-submit=\"ctrl.edit(ctrl.registration)\">\n" +
     "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerEditCategory\">Catégorie d'inscription</label>\n" +
-    "		<select class=\"form-control\" id=\"registerEditCategory\" name=\"registerEditCategory\" ng-model=\"ctrl.registration.category\" ng-change=\"ctrl.registration.formula = ''\" required>\n" +
+    "    <label for=\"registerFormCategory\">Catégorie d'inscription</label>\n" +
+    "		<select class=\"form-control\" id=\"registerFormCategory\" name=\"registerFormCategory\" ng-model=\"ctrl.registration.category\" ng-change=\"ctrl.registration.formula = ''\" required>\n" +
     "      <option></option>\n" +
     "      <option value=\"young\">Jeune</option>\n" +
     "      <option value=\"adult\">Adulte</option>\n" +
     "    </select>\n" +
     "	</div>\n" +
     "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerEditFormula\">Formule</label>\n" +
-    "		<select class=\"form-control\" id=\"registerEditFormula\" name=\"registerEditFormula\" ng-model=\"ctrl.registration.formula\" required>\n" +
+    "    <label for=\"registerFormFormula\">Formule</label>\n" +
+    "		<select class=\"form-control\" id=\"registerFormFormula\" name=\"registerFormFormula\" ng-model=\"ctrl.registration.formula\" required>\n" +
     "      <option></option>\n" +
     "      <option ng-repeat=\"formula in formulas\" value=\"{{::formula.id}}\" ng-show=\"ctrl.registration.category==formula.category\">\n" +
     "        {{::formula.id}}: {{::formula.label}}\n" +
@@ -229,15 +194,15 @@ angular.module("js/directives/registration-edit/registration-edit.html", []).run
     "    </select>\n" +
     "	</div>\n" +
     "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerEditLastname\">Nom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerEditLastname\" name=\"registerEditLastname\" ng-model=\"ctrl.registration.lastname\" required>\n" +
+    "    <label for=\"registerFormLastname\">Nom</label>\n" +
+    "		<input type=\"text\" class=\"form-control\" id=\"registerFormLastname\" name=\"registerFormLastname\" ng-model=\"ctrl.registration.lastname\" required>\n" +
     "	</div>\n" +
     "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerEditFirstname\">Prénom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerEditFirstname\" name=\"registerEditFirstname\" ng-model=\"ctrl.registration.firstname\" required>\n" +
+    "    <label for=\"registerFormFirstname\">Prénom</label>\n" +
+    "		<input type=\"text\" class=\"form-control\" id=\"registerFormFirstname\" name=\"registerFormFirstname\" ng-model=\"ctrl.registration.firstname\" required>\n" +
     "	</div>\n" +
-    "	<button type=\"submit\" class=\"btn btn-primary\">Modifier l'inscription</button>\n" +
-    "	<a href=\"#/registrations\" class=\"btn btn-warning\">Retour</a>\n" +
+    "	<button type=\"submit\" class=\"btn btn-primary\">{{::ctrl.labels.submit}}</button>\n" +
+    "	<a href=\"#/registrations\" class=\"btn btn-warning\" ng-if=\"ctrl.registration.id\">Retour</a>\n" +
     "</form>\n" +
     "");
 }]);
