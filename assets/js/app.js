@@ -12,8 +12,7 @@ angular
   .module('bcc', [
     'ngRoute',
     'templates-dist',
-    'ui.bootstrap.showErrors',
-    'rorymadden.date-dropdowns'
+    'ui.bootstrap.showErrors'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
