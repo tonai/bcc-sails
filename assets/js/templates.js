@@ -175,32 +175,245 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
 angular.module("js/directives/registration-form/registration-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("js/directives/registration-form/registration-form.html",
     "<formula-datasource formulas=\"formulas\" categories=\"categories\"></formula-datasource>\n" +
-    "<form id=\"registration-form\" ng-submit=\"ctrl.edit(ctrl.registration)\">\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerFormCategory\">Catégorie d'inscription</label>\n" +
-    "		<select class=\"form-control\" id=\"registerFormCategory\" name=\"registerFormCategory\" ng-model=\"ctrl.registration.category\" ng-change=\"ctrl.registration.formula = ''\" required>\n" +
-    "      <option></option>\n" +
-    "      <option value=\"young\">Jeune</option>\n" +
-    "      <option value=\"adult\">Adulte</option>\n" +
-    "    </select>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerFormFormula\">Formule</label>\n" +
-    "		<select class=\"form-control\" id=\"registerFormFormula\" name=\"registerFormFormula\" ng-model=\"ctrl.registration.formula\" required>\n" +
-    "      <option></option>\n" +
-    "      <option ng-repeat=\"formula in formulas\" value=\"{{::formula.id}}\" ng-show=\"ctrl.registration.category==formula.category\">\n" +
-    "        {{::formula.id}}: {{::formula.label}}\n" +
-    "      </option>\n" +
-    "    </select>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerFormLastname\">Nom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerFormLastname\" name=\"registerFormLastname\" ng-model=\"ctrl.registration.lastname\" required>\n" +
-    "	</div>\n" +
-    "	<div class=\"form-group\">\n" +
-    "    <label for=\"registerFormFirstname\">Prénom</label>\n" +
-    "		<input type=\"text\" class=\"form-control\" id=\"registerFormFirstname\" name=\"registerFormFirstname\" ng-model=\"ctrl.registration.firstname\" required>\n" +
-    "	</div>\n" +
+    "<form id=\"registration-form\" ng-submit=\"ctrl.edit(ctrl.registration)\" ng-class=\"{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}\">\n" +
+    "\n" +
+    "	<fieldset>\n" +
+    "		<legend>Général</legend>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6 hidden-add\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormYear\">Année d'inscription</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormYear\" name=\"registerFormYear\" ng-model=\"ctrl.registration.year\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6 hidden-add\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormConfirmed\">Inscription confirmée</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormConfirmed\" name=\"registerFormConfirmed\" ng-model=\"ctrl.registration.confirmed\">\n" +
+    "			      <option value=\"\">non</option>\n" +
+    "				    <option value=\"1\">oui</option>\n" +
+    "			    </select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormCategory\">Catégorie d'inscription</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormCategory\" name=\"registerFormCategory\" ng-model=\"ctrl.registration.category\" ng-change=\"ctrl.registration.formula = ''\" required>\n" +
+    "			      <option></option>\n" +
+    "			      <option value=\"young\">Jeune</option>\n" +
+    "			      <option value=\"adult\">Adulte</option>\n" +
+    "			    </select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFormula\">Formule</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormFormula\" name=\"registerFormFormula\" ng-model=\"ctrl.registration.formula\" required>\n" +
+    "			      <option></option>\n" +
+    "			      <option ng-repeat=\"formula in formulas\" value=\"{{::formula.id}}\" ng-show=\"ctrl.registration.category==formula.category\">\n" +
+    "			        {{::formula.id}}: {{::formula.label}}\n" +
+    "			      </option>\n" +
+    "			    </select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</fieldset>\n" +
+    "\n" +
+    "	<fieldset>\n" +
+    "		<legend>Informations personnelles</legend>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">Prénom</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormFirstname\" name=\"registerFormFirstname\" ng-model=\"ctrl.registration.firstname\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormLastname\">Nom</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormLastname\" name=\"registerFormLastname\" ng-model=\"ctrl.registration.lastname\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormEmail\">Email</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormEmail\" name=\"registerFormEmail\" ng-model=\"ctrl.registration.email\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormPhone\">Téléphone</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormPhone\" name=\"registerFormPhone\" ng-model=\"ctrl.registration.phone\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">N° de licence</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormLicence\" name=\"registerFormLicence\" ng-model=\"ctrl.registration.licence\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "		    <label for=\"registerFormFirstname\">Date de naissance</label>\n" +
+    "				<!--div class=\"row\">\n" +
+    "					<input rsmdatedropdowns ng-model=\"ctrl.registration.birthdate\" />\n" +
+    "				</div-->\n" +
+    "				<div class=\"row\">\n" +
+    "		  		<div class=\"col-xs-3\">\n" +
+    "						<div class=\"form-group\" show-errors>\n" +
+    "							<select class=\"form-control\" id=\"registerFormBirthday\" name=\"registerFormBirthday\" ng-model=\"ctrl.registration.birthday\">\n" +
+    "					      <option></option>\n" +
+    "					      <option ng-repeat=\"day in ctrl.days\" value=\"{{::day}}\">{{::day}}</option>\n" +
+    "					    </select>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "		  		<div class=\"col-xs-3\">\n" +
+    "						<div class=\"form-group\" show-errors>\n" +
+    "							<select class=\"form-control\" id=\"registerFormBirthmonth\" name=\"registerFormBirthmonth\" ng-model=\"ctrl.registration.birthmonth\">\n" +
+    "					      <option></option>\n" +
+    "					      <option ng-repeat=\"month in ctrl.months\" value=\"{{::month}}\">{{::month}}</option>\n" +
+    "					    </select>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "					<div class=\"col-xs-6\">\n" +
+    "						<div class=\"form-group\" show-errors>\n" +
+    "							<select class=\"form-control\" id=\"registerFormBirthyear\" name=\"registerFormBirthyear\" ng-model=\"ctrl.registration.birthyear\" required>\n" +
+    "					      <option></option>\n" +
+    "					      <option ng-repeat=\"year in ctrl.years\" value=\"{{::year}}\">{{::year}}</option>\n" +
+    "					    </select>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</fieldset>\n" +
+    "\n" +
+    "	<fieldset>\n" +
+    "		<legend>Adresse</legend>\n" +
+    "		<div class=\"form-group\" show-errors>\n" +
+    "			<label for=\"registerFormAddressAddress\">Rue et numéro</label>\n" +
+    "			<input type=\"text\" class=\"form-control\" id=\"registerFormAddressAddress\" name=\"registerFormAddressAddress\" ng-model=\"ctrl.registration.address.address\" required>\n" +
+    "		</div>\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormAddressPostcode\">Code postal</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressPostcode\" name=\"registerFormAddressPostcode\" ng-model=\"ctrl.registration.address.postcode\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormAddressCity\">Ville</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressCity\" name=\"registerFormAddressCity\" ng-model=\"ctrl.registration.address.city\" required>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</fieldset>\n" +
+    "\n" +
+    "	<fieldset>\n" +
+    "		<legend>Contacts</legend>\n" +
+    "		<div class=\"form-group\">\n" +
+    "			<button type=\"button\" class=\"btn btn-success\" ng-click=\"ctrl.addContact()\">\n" +
+    "				<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Ajouter un contact\n" +
+    "			</button>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"thumbnail registration-contact\" ng-repeat=\"(key, contact) in ctrl.registration.contacts\">\n" +
+    "		  <button type=\"button\" class=\"btn btn-danger registration-contact__remove\" ng-click=\"ctrl.removeContact(key)\">\n" +
+    "				<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Supprimer ce contact\n" +
+    "			</button>\n" +
+    "\n" +
+    "		  <div class=\"row\">\n" +
+    "		    <div class=\"col-xs-6\">\n" +
+    "		      <div class=\"form-group\" show-errors>\n" +
+    "		        <label for=\"registerFormContatcts{{key}}Label\">Label</label>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Label\" name=\"registerFormContatcts{{key}}Label\" ng-model=\"contact.label\" required>\n" +
+    "		      </div>\n" +
+    "		    </div>\n" +
+    "		  </div>\n" +
+    "\n" +
+    "		  <div class=\"row\">\n" +
+    "		    <div class=\"col-xs-6\">\n" +
+    "		      <div class=\"form-group\" show-errors>\n" +
+    "		        <label for=\"registerFormContatcts{{key}}Firstname\">Prénom</label>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Firstname\" name=\"registerFormContatcts{{key}}Firstname\" ng-model=\"contact.firstname\" required>\n" +
+    "		      </div>\n" +
+    "		    </div>\n" +
+    "		    <div class=\"col-xs-6\">\n" +
+    "		      <div class=\"form-group\" show-errors>\n" +
+    "		        <label for=\"registerFormContatcts{{key}}Lastname\">Nom</label>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Lastname\" name=\"registerFormContatcts{{key}}Lastname\" ng-model=\"contact.lastname\" required>\n" +
+    "		      </div>\n" +
+    "		    </div>\n" +
+    "		  </div>\n" +
+    "\n" +
+    "			<div class=\"row\">\n" +
+    "				<div class=\"col-xs-6\">\n" +
+    "					<div class=\"form-group\" show-errors>\n" +
+    "				    <label for=\"registerFormContatcts{{key}}Email\">Email</label>\n" +
+    "						<input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Email\" name=\"registerFormContatcts{{key}}Email\" ng-model=\"contact.email\">\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "				<div class=\"col-xs-6\">\n" +
+    "					<div class=\"form-group\" show-errors>\n" +
+    "				    <label for=\"registerFormContatcts{{key}}Phone\">Téléphone</label>\n" +
+    "						<input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Phone\" name=\"registerFormContatcts{{key}}Phone\" ng-model=\"contact.phone\">\n" +
+    "					</div>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</fieldset>\n" +
+    "\n" +
+    "	<fieldset>\n" +
+    "		<legend>Paiement</legend>\n" +
+    "		<div class=\"row\">\n" +
+    "  		<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">Prénom (si différent)</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormPaymentFirstname\" name=\"registerFormPaymentFirstname\" ng-model=\"ctrl.registration.payment.firstname\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "  		<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">Nom (si différent)</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormPaymentLastname\" name=\"registerFormPaymentLastname\" ng-model=\"ctrl.registration.payment.lastname\">\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "  		<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">Moyen de paiement</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormPaymentMethod\" name=\"registerFormPaymentMethod\" ng-model=\"ctrl.registration.payment.method\" required>\n" +
+    "						<option></option>\n" +
+    "						<option value=\"check\">Chèque</option>\n" +
+    "						<option value=\"cash\">Liquide</option>\n" +
+    "					</select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "  		<div class=\"col-xs-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">Avantage</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormPaymentAdvantage\" name=\"registerFormPaymentAdvantage\" ng-model=\"ctrl.registration.payment.advantage\">\n" +
+    "						<option></option>\n" +
+    "						<option value=\"pass92\">Pass 92</option>\n" +
+    "						<option value=\"passsport\">Pass'sport Courbevoie Puteaux</option>\n" +
+    "						<option value=\"courbevoie\">Inscrit dans d'autres clubs à Courbevoie</option>\n" +
+    "						<option value=\"family\">Plusieurs membre d'une même famille au club</option>\n" +
+    "					</select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "	</fieldset>\n" +
     "	<button type=\"submit\" class=\"btn btn-primary\">{{::ctrl.labels.submit}}</button>\n" +
     "	<a href=\"#/registrations\" class=\"btn btn-warning\" ng-if=\"ctrl.registration.id\">Retour</a>\n" +
     "</form>\n" +

@@ -10,6 +10,9 @@ angular.module('bcc').directive('registrationForm', function(){
 		bindToController: true,
 		controllerAs: 'ctrl',
 		controller: ['$rootScope', '$scope', 'registrationService', function($rootScope, $scope, registrationService){
+      var i;
+      var date = (new Date()).getFullYear();
+
       if (this.id) {
         this.labels = {
           submit: 'Modifier l\'inscription',
@@ -31,14 +34,43 @@ angular.module('bcc').directive('registrationForm', function(){
 
       this.edit = function(registration){
         registrationService.update(registration).then(function(){
+          if (!registration.id) {
+            this.registration.year = date;
+            //this.registration.confirmed = 1;
+          }
           $rootScope.$broadcast('message', {
             type: 'success',
             message: this.labels.message
           });
           if (!registration.id) {
+            this.registration.contacts = {};
             document.getElementById('registration-form').reset();
           }
         }.bind(this));
+      };
+
+      this.addContact = function(){
+        this.registration = this.registration || {};
+        this.registration.contacts = this.registration.contacts || {};
+        this.registration.contacts[Date.now()] = {};
+      };
+
+      this.removeContact = function(index){
+        console.log(index, this.registration.contacts);
+        delete this.registration.contacts[index];
+      };
+
+      this.days = [];
+      for (i = 0; i < 31; i++) {
+        this.days.push(i + 1);
+      }
+      this.months = [];
+      for (i = 0; i < 12; i++) {
+        this.months.push(i + 1);
+      }
+      this.years = [];
+      for (i = date; i > date - 100; i--) {
+        this.years.push(i);
       }
 
       // Bind.
