@@ -9,9 +9,11 @@ angular.module('bcc').directive('registrationForm', function(){
     },
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: ['$rootScope', '$scope', 'registrationService', function($rootScope, $scope, registrationService){
+		controller: ['$rootScope', '$scope', 'registrationService', 'categoryService', 'seasonService', function($rootScope, $scope, registrationService, categoryService, seasonService){
       var i;
       var date = (new Date()).getFullYear();
+      var currentSeason = seasonService.getCurrentSeason();
+      this.seasons = seasonService.getSeasons();
 
       if (this.id) {
         this.labels = {
@@ -33,11 +35,12 @@ angular.module('bcc').directive('registrationForm', function(){
       }
 
       this.edit = function(registration){
+        if (!registration.id) {
+          registration.season = currentSeason.label;
+          // Uncomment following line for re-registration.
+          //this.registration.confirmed = 1;
+        }
         registrationService.update(registration).then(function(){
-          if (!registration.id) {
-            this.registration.year = date;
-            //this.registration.confirmed = 1;
-          }
           $rootScope.$broadcast('message', {
             type: 'success',
             message: this.labels.message
@@ -46,6 +49,7 @@ angular.module('bcc').directive('registrationForm', function(){
             this.registration.contacts = {};
             document.getElementById('registration-form').reset();
           }
+          $(window).scrollTop(0);
         }.bind(this));
       };
 
@@ -74,11 +78,11 @@ angular.module('bcc').directive('registrationForm', function(){
       }
 
       // Bind.
-      /*$scope.$on('update.registration', function(data){
-        if (data.id == this.registration.id) {
-          // Warning data has been updated !
+      $scope.$watch('ctrl.registration.birthyear', function(newValue) {
+        if (newValue) {
+          this.category = categoryService.getCategory(newValue, currentSeason);
         }
-      }.bind(this));*/
+      }.bind(this));
 		}]
 	};
 });

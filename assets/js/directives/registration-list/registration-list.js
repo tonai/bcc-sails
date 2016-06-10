@@ -7,13 +7,17 @@ angular.module('bcc').directive('registrationList', function(){
 		scope: {},
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: ['$rootScope', '$scope', 'registrationService', 'helperService', function($rootScope, $scope, registrationService, helperService){
+		controller: ['$rootScope', '$scope', 'registrationService', 'helperService', 'categoryService', 'seasonService', function($rootScope, $scope, registrationService, helperService, categoryService, seasonService){
+      var currentSeason = seasonService.getCurrentSeason();
+      this.seasons = seasonService.getSeasons();
       this.registrations = [];
       this.current = 0;
       this.limit = 10;
+      this.ageCategories = categoryService.getCategories();
 
       // Add callback.
       this.addDone = function(event, registration) {
+        registration.ageCategory = categoryService.getCategory(registration.birthyear, currentSeason);
         this.registrations.push(registration);
         $scope.$digest();
       }
@@ -55,7 +59,12 @@ angular.module('bcc').directive('registrationList', function(){
       }.bind(this));
 
       // Initialization.
-      this.registrations = helperService.objectToArray(registrationService.findAll());
+      this.registrations = helperService
+        .objectToArray(registrationService.findAll())
+        .map(function(registration){
+          registration.ageCategory = categoryService.getCategory(registration.birthyear, currentSeason);
+          return registration;
+        }.bind(this));
 		}]
 	};
 });

@@ -4,8 +4,15 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
+      <th>
+        <label for="seasonFilter">Saison</label>
+        <select class="form-control" id="seasonFilter" name="seasonFilter" ng-model="ctrl.seasonFilter">
+          <option></option>
+          <option ng-repeat="season in ctrl.seasons" value="{{::season}}">{{::season}}</option>
+        </select>
+      </th>
         <th>
-          <label for="categoryFilter">Catégorie</label>
+          <label for="categoryFilter">Catégorie d'inscription</label>
       		<select class="form-control" id="categoryFilter" name="categoryFilter" ng-model="ctrl.categoryFilter">
             <option></option>
             <option value="young">Jeune</option>
@@ -17,6 +24,13 @@
       		<select class="form-control" id="formulaFilter" name="formulaFilter" ng-model="ctrl.formulaFilter">
             <option></option>
             <option ng-repeat="formula in ctrl.formulas" value="{{::formula.id}}">{{::formula.id}}</option>
+          </select>
+        </th>
+        <th>
+          <label for="formulaFilter">Catégorie d'âge</label>
+      		<select class="form-control" id="ageFilter" name="ageFilter" ng-model="ctrl.ageFilter">
+            <option></option>
+            <option ng-repeat="ageCategory in ctrl.ageCategories" value="{{::ageCategory}}">{{::ageCategory}}</option>
           </select>
         </th>
         <th>
@@ -32,12 +46,14 @@
     </thead>
     <tbody>
       <tr ng-repeat="registration in ctrl.registrations
-        | filter:{category:ctrl.categoryFilter, formula:ctrl.formulaFilter, firstname:ctrl.firstnameFilter, lastname:ctrl.lastnameFilter}
+        | filter:{season:ctrl.seasonFilter, category:ctrl.categoryFilter, formula:ctrl.formulaFilter, ageCategory:ctrl.ageFilter, firstname:ctrl.firstnameFilter, lastname:ctrl.lastnameFilter}
         | limitTo:ctrl.limit:ctrl.current*ctrl.limit track by registration.id"
         ng-class="{danger: registration.offline}"
       >
+        <td>{{::registration.season}}</td>
         <td>{{::ctrl.categories[registration.category].label}}</td>
         <td title="{{::ctrl.getFormulaLabel(registration.formula)}}">{{::registration.formula}}</td>
+        <td>{{::registration.ageCategory}}</td>
         <td>{{::registration.firstname}}</td>
         <td>{{::registration.lastname}}</td>
         <td>

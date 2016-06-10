@@ -180,13 +180,16 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "	<fieldset>\n" +
     "		<legend>Général</legend>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6 hidden-add\">\n" +
+    "			<div class=\"col-sm-6 hidden-add\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
-    "			    <label for=\"registerFormYear\">Année d'inscription</label>\n" +
-    "					<input type=\"text\" class=\"form-control\" id=\"registerFormYear\" name=\"registerFormYear\" ng-model=\"ctrl.registration.year\">\n" +
+    "			    <label for=\"registerFormSeason\">Saison</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormSeason\" name=\"registerFormSeason\" ng-model=\"ctrl.registration.season\">\n" +
+    "			      <option></option>\n" +
+    "						<option ng-repeat=\"season in ctrl.seasons\" value=\"{{::season}}\">{{::season}}</option>\n" +
+    "			    </select>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6 hidden-add\">\n" +
+    "			<div class=\"col-sm-6 hidden-add\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormConfirmed\">Inscription confirmée</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormConfirmed\" name=\"registerFormConfirmed\" ng-model=\"ctrl.registration.confirmed\">\n" +
@@ -198,7 +201,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		</div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormCategory\">Catégorie d'inscription</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormCategory\" name=\"registerFormCategory\" ng-model=\"ctrl.registration.category\" ng-change=\"ctrl.registration.formula = ''\" required>\n" +
@@ -208,7 +211,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			    </select>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFormula\">Formule</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormFormula\" name=\"registerFormFormula\" ng-model=\"ctrl.registration.formula\" required>\n" +
@@ -225,13 +228,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "	<fieldset>\n" +
     "		<legend>Informations personnelles</legend>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Prénom</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormFirstname\" name=\"registerFormFirstname\" ng-model=\"ctrl.registration.firstname\" required>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormLastname\">Nom</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormLastname\" name=\"registerFormLastname\" ng-model=\"ctrl.registration.lastname\" required>\n" +
@@ -240,13 +243,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		</div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormEmail\">Email</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormEmail\" name=\"registerFormEmail\" ng-model=\"ctrl.registration.email\" required>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormPhone\">Téléphone</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormPhone\" name=\"registerFormPhone\" ng-model=\"ctrl.registration.phone\" required>\n" +
@@ -255,19 +258,16 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		</div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">N° de licence</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormLicence\" name=\"registerFormLicence\" ng-model=\"ctrl.registration.licence\">\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-4\">\n" +
     "		    <label for=\"registerFormFirstname\">Date de naissance</label>\n" +
-    "				<!--div class=\"row\">\n" +
-    "					<input rsmdatedropdowns ng-model=\"ctrl.registration.birthdate\" />\n" +
-    "				</div-->\n" +
     "				<div class=\"row\">\n" +
-    "		  		<div class=\"col-xs-3\">\n" +
+    "		  		<div class=\"col-xs-4\">\n" +
     "						<div class=\"form-group\" show-errors>\n" +
     "							<select class=\"form-control\" id=\"registerFormBirthday\" name=\"registerFormBirthday\" ng-model=\"ctrl.registration.birthday\">\n" +
     "					      <option></option>\n" +
@@ -275,7 +275,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "					    </select>\n" +
     "						</div>\n" +
     "					</div>\n" +
-    "		  		<div class=\"col-xs-3\">\n" +
+    "		  		<div class=\"col-xs-4\">\n" +
     "						<div class=\"form-group\" show-errors>\n" +
     "							<select class=\"form-control\" id=\"registerFormBirthmonth\" name=\"registerFormBirthmonth\" ng-model=\"ctrl.registration.birthmonth\">\n" +
     "					      <option></option>\n" +
@@ -283,7 +283,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "					    </select>\n" +
     "						</div>\n" +
     "					</div>\n" +
-    "					<div class=\"col-xs-6\">\n" +
+    "					<div class=\"col-xs-4\">\n" +
     "						<div class=\"form-group\" show-errors>\n" +
     "							<select class=\"form-control\" id=\"registerFormBirthyear\" name=\"registerFormBirthyear\" ng-model=\"ctrl.registration.birthyear\" required>\n" +
     "					      <option></option>\n" +
@@ -292,6 +292,10 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "						</div>\n" +
     "					</div>\n" +
     "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-2\">\n" +
+    "				<label for=\"registerFormFirstname\">Catégorie d'âge</label>\n" +
+    "				<div class=\"form-control-static\">{{ctrl.category}}</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</fieldset>\n" +
@@ -303,13 +307,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			<input type=\"text\" class=\"form-control\" id=\"registerFormAddressAddress\" name=\"registerFormAddressAddress\" ng-model=\"ctrl.registration.address.address\" required>\n" +
     "		</div>\n" +
     "		<div class=\"row\">\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormAddressPostcode\">Code postal</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressPostcode\" name=\"registerFormAddressPostcode\" ng-model=\"ctrl.registration.address.postcode\" required>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-xs-6\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormAddressCity\">Ville</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressCity\" name=\"registerFormAddressCity\" ng-model=\"ctrl.registration.address.city\" required>\n" +
@@ -341,13 +345,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		  </div>\n" +
     "\n" +
     "		  <div class=\"row\">\n" +
-    "		    <div class=\"col-xs-6\">\n" +
+    "		    <div class=\"col-sm-6\">\n" +
     "		      <div class=\"form-group\" show-errors>\n" +
     "		        <label for=\"registerFormContatcts{{key}}Firstname\">Prénom</label>\n" +
     "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Firstname\" name=\"registerFormContatcts{{key}}Firstname\" ng-model=\"contact.firstname\" required>\n" +
     "		      </div>\n" +
     "		    </div>\n" +
-    "		    <div class=\"col-xs-6\">\n" +
+    "		    <div class=\"col-sm-6\">\n" +
     "		      <div class=\"form-group\" show-errors>\n" +
     "		        <label for=\"registerFormContatcts{{key}}Lastname\">Nom</label>\n" +
     "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Lastname\" name=\"registerFormContatcts{{key}}Lastname\" ng-model=\"contact.lastname\" required>\n" +
@@ -356,13 +360,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		  </div>\n" +
     "\n" +
     "			<div class=\"row\">\n" +
-    "				<div class=\"col-xs-6\">\n" +
+    "				<div class=\"col-sm-6\">\n" +
     "					<div class=\"form-group\" show-errors>\n" +
     "				    <label for=\"registerFormContatcts{{key}}Email\">Email</label>\n" +
     "						<input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Email\" name=\"registerFormContatcts{{key}}Email\" ng-model=\"contact.email\">\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "				<div class=\"col-xs-6\">\n" +
+    "				<div class=\"col-sm-6\">\n" +
     "					<div class=\"form-group\" show-errors>\n" +
     "				    <label for=\"registerFormContatcts{{key}}Phone\">Téléphone</label>\n" +
     "						<input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Phone\" name=\"registerFormContatcts{{key}}Phone\" ng-model=\"contact.phone\">\n" +
@@ -375,13 +379,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "	<fieldset>\n" +
     "		<legend>Paiement</legend>\n" +
     "		<div class=\"row\">\n" +
-    "  		<div class=\"col-xs-6\">\n" +
+    "  		<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Prénom (si différent)</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormPaymentFirstname\" name=\"registerFormPaymentFirstname\" ng-model=\"ctrl.registration.payment.firstname\">\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "  		<div class=\"col-xs-6\">\n" +
+    "  		<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Nom (si différent)</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormPaymentLastname\" name=\"registerFormPaymentLastname\" ng-model=\"ctrl.registration.payment.lastname\">\n" +
@@ -390,7 +394,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		</div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
-    "  		<div class=\"col-xs-6\">\n" +
+    "  		<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Moyen de paiement</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormPaymentMethod\" name=\"registerFormPaymentMethod\" ng-model=\"ctrl.registration.payment.method\" required>\n" +
@@ -400,15 +404,18 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "					</select>\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "  		<div class=\"col-xs-6\">\n" +
+    "  		<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Avantage</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormPaymentAdvantage\" name=\"registerFormPaymentAdvantage\" ng-model=\"ctrl.registration.payment.advantage\">\n" +
     "						<option></option>\n" +
     "						<option value=\"pass92\">Pass 92</option>\n" +
-    "						<option value=\"passsport\">Pass'sport Courbevoie Puteaux</option>\n" +
-    "						<option value=\"courbevoie\">Inscrit dans d'autres clubs à Courbevoie</option>\n" +
+    "						<option value=\"passSport\">Pass'sport Courbevoie Puteaux</option>\n" +
+    "						<option value=\"multipleClub\">Inscrit dans d'autres clubs à Courbevoie</option>\n" +
     "						<option value=\"family\">Plusieurs membre d'une même famille au club</option>\n" +
+    "						<option value=\"multiplePayment\">Paiements en plusieurs fois</option>\n" +
+    "						<option value=\"partialRegistration\">Inscription en cours d'année</option>\n" +
+    "						<option value=\"nicheSwap\">Changement de créneau</option>\n" +
     "					</select>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -428,8 +435,15 @@ angular.module("js/directives/registration-list/registration-list.html", []).run
     "  <table class=\"table table-striped table-hover\">\n" +
     "    <thead>\n" +
     "      <tr>\n" +
+    "      <th>\n" +
+    "        <label for=\"seasonFilter\">Saison</label>\n" +
+    "        <select class=\"form-control\" id=\"seasonFilter\" name=\"seasonFilter\" ng-model=\"ctrl.seasonFilter\">\n" +
+    "          <option></option>\n" +
+    "          <option ng-repeat=\"season in ctrl.seasons\" value=\"{{::season}}\">{{::season}}</option>\n" +
+    "        </select>\n" +
+    "      </th>\n" +
     "        <th>\n" +
-    "          <label for=\"categoryFilter\">Catégorie</label>\n" +
+    "          <label for=\"categoryFilter\">Catégorie d'inscription</label>\n" +
     "      		<select class=\"form-control\" id=\"categoryFilter\" name=\"categoryFilter\" ng-model=\"ctrl.categoryFilter\">\n" +
     "            <option></option>\n" +
     "            <option value=\"young\">Jeune</option>\n" +
@@ -441,6 +455,13 @@ angular.module("js/directives/registration-list/registration-list.html", []).run
     "      		<select class=\"form-control\" id=\"formulaFilter\" name=\"formulaFilter\" ng-model=\"ctrl.formulaFilter\">\n" +
     "            <option></option>\n" +
     "            <option ng-repeat=\"formula in ctrl.formulas\" value=\"{{::formula.id}}\">{{::formula.id}}</option>\n" +
+    "          </select>\n" +
+    "        </th>\n" +
+    "        <th>\n" +
+    "          <label for=\"formulaFilter\">Catégorie d'âge</label>\n" +
+    "      		<select class=\"form-control\" id=\"ageFilter\" name=\"ageFilter\" ng-model=\"ctrl.ageFilter\">\n" +
+    "            <option></option>\n" +
+    "            <option ng-repeat=\"ageCategory in ctrl.ageCategories\" value=\"{{::ageCategory}}\">{{::ageCategory}}</option>\n" +
     "          </select>\n" +
     "        </th>\n" +
     "        <th>\n" +
@@ -456,12 +477,14 @@ angular.module("js/directives/registration-list/registration-list.html", []).run
     "    </thead>\n" +
     "    <tbody>\n" +
     "      <tr ng-repeat=\"registration in ctrl.registrations\n" +
-    "        | filter:{category:ctrl.categoryFilter, formula:ctrl.formulaFilter, firstname:ctrl.firstnameFilter, lastname:ctrl.lastnameFilter}\n" +
+    "        | filter:{season:ctrl.seasonFilter, category:ctrl.categoryFilter, formula:ctrl.formulaFilter, ageCategory:ctrl.ageFilter, firstname:ctrl.firstnameFilter, lastname:ctrl.lastnameFilter}\n" +
     "        | limitTo:ctrl.limit:ctrl.current*ctrl.limit track by registration.id\"\n" +
     "        ng-class=\"{danger: registration.offline}\"\n" +
     "      >\n" +
+    "        <td>{{::registration.season}}</td>\n" +
     "        <td>{{::ctrl.categories[registration.category].label}}</td>\n" +
     "        <td title=\"{{::ctrl.getFormulaLabel(registration.formula)}}\">{{::registration.formula}}</td>\n" +
+    "        <td>{{::registration.ageCategory}}</td>\n" +
     "        <td>{{::registration.firstname}}</td>\n" +
     "        <td>{{::registration.lastname}}</td>\n" +
     "        <td>\n" +
