@@ -41,7 +41,16 @@
           <label for="lastnameFilter">Nom</label>
           <input class="form-control" id="lastnameFilter" name="lastnameFilter" ng-model="ctrl.lastnameFilter" />
         </th>
-        <th>Actions</th>
+        <th>
+          <button
+            type="button"
+            class="btn btn-primary"
+            ng-csv="ctrl.csvData"
+            csv-header="ctrl.csvHeader"
+            field-separator=";"
+            filename="registrations.csv"
+          >Export</button>
+        </th>
       </tr>
     </thead>
     <tbody>

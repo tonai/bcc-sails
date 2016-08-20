@@ -119,7 +119,7 @@ angular.module('bcc').factory('registrationService', ['$rootScope', '$q', '$http
   api.init = function(){
     registrations = {};
     $rootScope.$broadcast('initStart.registration');
-    return api.count().then(function(response){
+    api.count().then(function(response){
       var count = response.data.count;
       return api.getRegistrationsRecursive(response.data.count).then(function(){
         $rootScope.$broadcast('initEnd.registration');

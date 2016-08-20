@@ -247,8 +247,8 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
-    "					<label for=\"registerFormKind\">Genre</label>\n" +
-    "					<select class=\"form-control\" id=\"registerFormKind\" name=\"registerFormKind\" ng-model=\"ctrl.registration.kind\" required>\n" +
+    "					<label for=\"registerFormGender\">Genre</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormGender\" name=\"registerFormGender\" ng-model=\"ctrl.registration.gender\" required>\n" +
     "						<option></option>\n" +
     "						<option value=\"man\">Homme</option>\n" +
     "						<option value=\"woman\">Femme</option>\n" +
@@ -324,7 +324,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				</div>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\">\n" +
-    "				<div class=\"form-group\" show-errors>\n" +
+    "				<div class=\"form-group\">\n" +
     "			    <label for=\"registerFormImagege\">Image</label>\n" +
     "				</div>\n" +
     "			</div>\n" +
@@ -503,7 +503,16 @@ angular.module("js/directives/registration-list/registration-list.html", []).run
     "          <label for=\"lastnameFilter\">Nom</label>\n" +
     "          <input class=\"form-control\" id=\"lastnameFilter\" name=\"lastnameFilter\" ng-model=\"ctrl.lastnameFilter\" />\n" +
     "        </th>\n" +
-    "        <th><a href=\"#\" class=\"btn btn-primary\">Export</a></th>\n" +
+    "        <th>\n" +
+    "          <button\n" +
+    "            type=\"button\"\n" +
+    "            class=\"btn btn-primary\"\n" +
+    "            ng-csv=\"ctrl.csvData\"\n" +
+    "            csv-header=\"ctrl.csvHeader\"\n" +
+    "            field-separator=\";\"\n" +
+    "            filename=\"registrations.csv\"\n" +
+    "          >Export</button>\n" +
+    "        </th>\n" +
     "      </tr>\n" +
     "    </thead>\n" +
     "    <tbody>\n" +

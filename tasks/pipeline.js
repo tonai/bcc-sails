@@ -31,6 +31,9 @@ var jsFilesToInject = [
   'bower_components/angular-route/angular-route.min.js',
   'bower_components/angular-date-dropdowns/directive.js',
   'bower_components/angular-bootstrap-show-errors/src/showErrors.min.js',
+  'bower_components/angular-sanitize/angular-sanitize.min.js',
+  'bower_components/ng-csv/build/ng-csv.min.js',
+
 
   'js/dependencies/sails.io.js',
 

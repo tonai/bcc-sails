@@ -15,11 +15,55 @@ angular.module('bcc').directive('registrationList', function(){
       this.limit = 10;
       this.ageCategories = categoryService.getCategories();
 
+      // CSV data.
+      this.csvData = [];
+      this.csvHeader = {
+        'Saison': 'season',
+        'Inscription confirmée': 'confirmed',
+        'Catégorie d\'inscription': 'category',
+        'Formule': 'formula',
+        'Prénom': 'firstname',
+        'Nom': 'lastname',
+        'Genre': 'gender',
+        'Pays': 'country',
+        'Email': 'email',
+        'Téléphone': 'phone',
+        'Date de naissance: Jour': 'birthday',
+        'Date de naissance: Mois': 'birthmonth',
+        'Date de naissance: Année': 'birthyear',
+        'Licence': 'licence',
+        'Adresse : Rue et numéro': 'address.address',
+        'Adresse : Code postal': 'address.postcode',
+        'Adresse : Ville': 'address.city'
+      };
+
       // Add callback.
       this.addDone = function(event, registration) {
         registration.ageCategory = categoryService.getCategory(registration.birthyear, currentSeason);
         this.registrations.push(registration);
+        this.addCsv(registration);
+        console.log(this.csvData);
         $scope.$digest();
+      }
+
+      // Add to CSV.
+      this.addCsv = function(registration) {
+        var value;
+        var csvRegistration = {};
+
+        for (var i in this.csvHeader) {
+          if (this.csvHeader.hasOwnProperty(i)) {
+            value = registration;
+            this.csvHeader[i]
+              .split('.')
+              .forEach(function(key){
+                value = value[key] ? value[key] : '';
+              });
+            csvRegistration[i] = value;
+          }
+        }
+
+        this.csvData.push(csvRegistration);
       }
 
       // Remove callback.
@@ -42,6 +86,7 @@ angular.module('bcc').directive('registrationList', function(){
       this.removeDone = function(event, registration) {
         var index = helperService.getArrayIndex(this.registrations, registration.id);
         this.registrations.splice(index, 1);
+        this.csvData.splice(index, 1);
       }
 
       // Get formula Label;

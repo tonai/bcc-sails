@@ -12,7 +12,9 @@ angular
   .module('bcc', [
     'ngRoute',
     'templates-dist',
-    'ui.bootstrap.showErrors'
+    'ui.bootstrap.showErrors',
+    'ngSanitize',
+    'ngCsv'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
