@@ -175,6 +175,7 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
 angular.module("js/directives/registration-form/registration-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("js/directives/registration-form/registration-form.html",
     "<formula-datasource formulas=\"formulas\" categories=\"categories\"></formula-datasource>\n" +
+    "<country-datasource countries=\"countries\"></country-datasource>\n" +
     "<form id=\"registration-form\" ng-submit=\"ctrl.edit(ctrl.registration)\" ng-class=\"{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}\">\n" +
     "\n" +
     "	<fieldset>\n" +
@@ -242,6 +243,29 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			</div>\n" +
     "		</div>\n" +
     "\n" +
+    "\n" +
+    "		<div class=\"row\">\n" +
+    "			<div class=\"col-sm-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "					<label for=\"registerFormKind\">Genre</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormKind\" name=\"registerFormKind\" ng-model=\"ctrl.registration.kind\" required>\n" +
+    "						<option></option>\n" +
+    "						<option value=\"man\">Homme</option>\n" +
+    "						<option value=\"woman\">Femme</option>\n" +
+    "					</select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "			<div class=\"col-sm-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormCountry\">Pays</label>\n" +
+    "					<select class=\"form-control\" id=\"registerFormCountry\" name=\"registerFormCountry\" ng-model=\"ctrl.registration.country\">\n" +
+    "						<option></option>\n" +
+    "						<option ng-repeat=\"country in countries\" value=\"{{country.code}}\">{{country.name}}</option>\n" +
+    "					</select>\n" +
+    "				</div>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
+    "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
@@ -252,50 +276,57 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormPhone\">Téléphone</label>\n" +
-    "					<input type=\"text\" class=\"form-control\" id=\"registerFormPhone\" name=\"registerFormPhone\" ng-model=\"ctrl.registration.phone\" required>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormPhone\" name=\"registerFormPhone\" ng-model=\"ctrl.registration.phone\">\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
+    "				<div class=\"row\">\n" +
+    "					<div class=\"col-sm-8\">\n" +
+    "				    <label for=\"registerFormFirstname\">Date de naissance</label>\n" +
+    "						<div class=\"row\">\n" +
+    "				  		<div class=\"col-xs-4\">\n" +
+    "								<div class=\"form-group\" show-errors>\n" +
+    "									<select class=\"form-control\" id=\"registerFormBirthday\" name=\"registerFormBirthday\" ng-model=\"ctrl.registration.birthday\">\n" +
+    "							      <option></option>\n" +
+    "							      <option ng-repeat=\"day in ctrl.days\" value=\"{{::day}}\">{{::day}}</option>\n" +
+    "							    </select>\n" +
+    "								</div>\n" +
+    "							</div>\n" +
+    "				  		<div class=\"col-xs-4\">\n" +
+    "								<div class=\"form-group\" show-errors>\n" +
+    "									<select class=\"form-control\" id=\"registerFormBirthmonth\" name=\"registerFormBirthmonth\" ng-model=\"ctrl.registration.birthmonth\">\n" +
+    "							      <option></option>\n" +
+    "							      <option ng-repeat=\"month in ctrl.months\" value=\"{{::month}}\">{{::month}}</option>\n" +
+    "							    </select>\n" +
+    "								</div>\n" +
+    "							</div>\n" +
+    "							<div class=\"col-xs-4\">\n" +
+    "								<div class=\"form-group\" show-errors>\n" +
+    "									<select class=\"form-control\" id=\"registerFormBirthyear\" name=\"registerFormBirthyear\" ng-model=\"ctrl.registration.birthyear\">\n" +
+    "							      <option></option>\n" +
+    "							      <option ng-repeat=\"year in ctrl.years\" value=\"{{::year}}\">{{::year}}</option>\n" +
+    "							    </select>\n" +
+    "								</div>\n" +
+    "							</div>\n" +
+    "						</div>\n" +
+    "					</div>\n" +
+    "					<div class=\"col-sm-4\">\n" +
+    "						<label for=\"registerFormFirstname\">Catégorie d'âge</label>\n" +
+    "						<div class=\"form-control-static\">{{ctrl.category}}</div>\n" +
+    "					</div>\n" +
+    "				</div>\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">N° de licence</label>\n" +
     "					<input type=\"text\" class=\"form-control\" id=\"registerFormLicence\" name=\"registerFormLicence\" ng-model=\"ctrl.registration.licence\">\n" +
     "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-4\">\n" +
-    "		    <label for=\"registerFormFirstname\">Date de naissance</label>\n" +
-    "				<div class=\"row\">\n" +
-    "		  		<div class=\"col-xs-4\">\n" +
-    "						<div class=\"form-group\" show-errors>\n" +
-    "							<select class=\"form-control\" id=\"registerFormBirthday\" name=\"registerFormBirthday\" ng-model=\"ctrl.registration.birthday\">\n" +
-    "					      <option></option>\n" +
-    "					      <option ng-repeat=\"day in ctrl.days\" value=\"{{::day}}\">{{::day}}</option>\n" +
-    "					    </select>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "		  		<div class=\"col-xs-4\">\n" +
-    "						<div class=\"form-group\" show-errors>\n" +
-    "							<select class=\"form-control\" id=\"registerFormBirthmonth\" name=\"registerFormBirthmonth\" ng-model=\"ctrl.registration.birthmonth\">\n" +
-    "					      <option></option>\n" +
-    "					      <option ng-repeat=\"month in ctrl.months\" value=\"{{::month}}\">{{::month}}</option>\n" +
-    "					    </select>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
-    "					<div class=\"col-xs-4\">\n" +
-    "						<div class=\"form-group\" show-errors>\n" +
-    "							<select class=\"form-control\" id=\"registerFormBirthyear\" name=\"registerFormBirthyear\" ng-model=\"ctrl.registration.birthyear\" required>\n" +
-    "					      <option></option>\n" +
-    "					      <option ng-repeat=\"year in ctrl.years\" value=\"{{::year}}\">{{::year}}</option>\n" +
-    "					    </select>\n" +
-    "						</div>\n" +
-    "					</div>\n" +
+    "			<div class=\"col-sm-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormImagege\">Image</label>\n" +
     "				</div>\n" +
-    "			</div>\n" +
-    "			<div class=\"col-sm-2\">\n" +
-    "				<label for=\"registerFormFirstname\">Catégorie d'âge</label>\n" +
-    "				<div class=\"form-control-static\">{{ctrl.category}}</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
     "	</fieldset>\n" +
@@ -304,19 +335,19 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		<legend>Adresse</legend>\n" +
     "		<div class=\"form-group\" show-errors>\n" +
     "			<label for=\"registerFormAddressAddress\">Rue et numéro</label>\n" +
-    "			<input type=\"text\" class=\"form-control\" id=\"registerFormAddressAddress\" name=\"registerFormAddressAddress\" ng-model=\"ctrl.registration.address.address\" required>\n" +
+    "			<input type=\"text\" class=\"form-control\" id=\"registerFormAddressAddress\" name=\"registerFormAddressAddress\" ng-model=\"ctrl.registration.address.address\">\n" +
     "		</div>\n" +
     "		<div class=\"row\">\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormAddressPostcode\">Code postal</label>\n" +
-    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressPostcode\" name=\"registerFormAddressPostcode\" ng-model=\"ctrl.registration.address.postcode\" required>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressPostcode\" name=\"registerFormAddressPostcode\" ng-model=\"ctrl.registration.address.postcode\">\n" +
     "				</div>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormAddressCity\">Ville</label>\n" +
-    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressCity\" name=\"registerFormAddressCity\" ng-model=\"ctrl.registration.address.city\" required>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormAddressCity\" name=\"registerFormAddressCity\" ng-model=\"ctrl.registration.address.city\">\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -339,7 +370,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		    <div class=\"col-xs-6\">\n" +
     "		      <div class=\"form-group\" show-errors>\n" +
     "		        <label for=\"registerFormContatcts{{key}}Label\">Label</label>\n" +
-    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Label\" name=\"registerFormContatcts{{key}}Label\" ng-model=\"contact.label\" required>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Label\" name=\"registerFormContatcts{{key}}Label\" ng-model=\"contact.label\">\n" +
     "		      </div>\n" +
     "		    </div>\n" +
     "		  </div>\n" +
@@ -348,13 +379,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		    <div class=\"col-sm-6\">\n" +
     "		      <div class=\"form-group\" show-errors>\n" +
     "		        <label for=\"registerFormContatcts{{key}}Firstname\">Prénom</label>\n" +
-    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Firstname\" name=\"registerFormContatcts{{key}}Firstname\" ng-model=\"contact.firstname\" required>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Firstname\" name=\"registerFormContatcts{{key}}Firstname\" ng-model=\"contact.firstname\">\n" +
     "		      </div>\n" +
     "		    </div>\n" +
     "		    <div class=\"col-sm-6\">\n" +
     "		      <div class=\"form-group\" show-errors>\n" +
     "		        <label for=\"registerFormContatcts{{key}}Lastname\">Nom</label>\n" +
-    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Lastname\" name=\"registerFormContatcts{{key}}Lastname\" ng-model=\"contact.lastname\" required>\n" +
+    "		        <input type=\"text\" class=\"form-control\" id=\"registerFormContatcts{{key}}Lastname\" name=\"registerFormContatcts{{key}}Lastname\" ng-model=\"contact.lastname\">\n" +
     "		      </div>\n" +
     "		    </div>\n" +
     "		  </div>\n" +
@@ -397,7 +428,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "  		<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
     "			    <label for=\"registerFormFirstname\">Moyen de paiement</label>\n" +
-    "					<select class=\"form-control\" id=\"registerFormPaymentMethod\" name=\"registerFormPaymentMethod\" ng-model=\"ctrl.registration.payment.method\" required>\n" +
+    "					<select class=\"form-control\" id=\"registerFormPaymentMethod\" name=\"registerFormPaymentMethod\" ng-model=\"ctrl.registration.payment.method\">\n" +
     "						<option></option>\n" +
     "						<option value=\"check\">Chèque</option>\n" +
     "						<option value=\"cash\">Liquide</option>\n" +
@@ -472,7 +503,7 @@ angular.module("js/directives/registration-list/registration-list.html", []).run
     "          <label for=\"lastnameFilter\">Nom</label>\n" +
     "          <input class=\"form-control\" id=\"lastnameFilter\" name=\"lastnameFilter\" ng-model=\"ctrl.lastnameFilter\" />\n" +
     "        </th>\n" +
-    "        <th>Actions</th>\n" +
+    "        <th><a href=\"#\" class=\"btn btn-primary\">Export</a></th>\n" +
     "      </tr>\n" +
     "    </thead>\n" +
     "    <tbody>\n" +

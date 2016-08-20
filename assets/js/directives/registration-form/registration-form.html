@@ -1,4 +1,5 @@
 <formula-datasource formulas="formulas" categories="categories"></formula-datasource>
+<country-datasource countries="countries"></country-datasource>
 <form id="registration-form" ng-submit="ctrl.edit(ctrl.registration)" ng-class="{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}">
 
 	<fieldset>
@@ -66,6 +67,29 @@
 			</div>
 		</div>
 
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group" show-errors>
+					<label for="registerFormGender">Genre</label>
+					<select class="form-control" id="registerFormGender" name="registerFormGender" ng-model="ctrl.registration.gender" required>
+						<option></option>
+						<option value="man">Homme</option>
+						<option value="woman">Femme</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group" show-errors>
+			    <label for="registerFormCountry">Pays</label>
+					<select class="form-control" id="registerFormCountry" name="registerFormCountry" ng-model="ctrl.registration.country">
+						<option></option>
+						<option ng-repeat="country in countries" value="{{country.code}}">{{country.name}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group" show-errors>
@@ -76,50 +100,57 @@
 			<div class="col-sm-6">
 				<div class="form-group" show-errors>
 			    <label for="registerFormPhone">Téléphone</label>
-					<input type="text" class="form-control" id="registerFormPhone" name="registerFormPhone" ng-model="ctrl.registration.phone" required>
+					<input type="text" class="form-control" id="registerFormPhone" name="registerFormPhone" ng-model="ctrl.registration.phone">
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm-6">
+				<div class="row">
+					<div class="col-sm-8">
+				    <label for="registerFormFirstname">Date de naissance</label>
+						<div class="row">
+				  		<div class="col-xs-4">
+								<div class="form-group" show-errors>
+									<select class="form-control" id="registerFormBirthday" name="registerFormBirthday" ng-model="ctrl.registration.birthday">
+							      <option></option>
+							      <option ng-repeat="day in ctrl.days" value="{{::day}}">{{::day}}</option>
+							    </select>
+								</div>
+							</div>
+				  		<div class="col-xs-4">
+								<div class="form-group" show-errors>
+									<select class="form-control" id="registerFormBirthmonth" name="registerFormBirthmonth" ng-model="ctrl.registration.birthmonth">
+							      <option></option>
+							      <option ng-repeat="month in ctrl.months" value="{{::month}}">{{::month}}</option>
+							    </select>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="form-group" show-errors>
+									<select class="form-control" id="registerFormBirthyear" name="registerFormBirthyear" ng-model="ctrl.registration.birthyear">
+							      <option></option>
+							      <option ng-repeat="year in ctrl.years" value="{{::year}}">{{::year}}</option>
+							    </select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label for="registerFormFirstname">Catégorie d'âge</label>
+						<div class="form-control-static">{{ctrl.category}}</div>
+					</div>
+				</div>
 				<div class="form-group" show-errors>
 			    <label for="registerFormFirstname">N° de licence</label>
 					<input type="text" class="form-control" id="registerFormLicence" name="registerFormLicence" ng-model="ctrl.registration.licence">
 				</div>
 			</div>
-			<div class="col-sm-4">
-		    <label for="registerFormFirstname">Date de naissance</label>
-				<div class="row">
-		  		<div class="col-xs-4">
-						<div class="form-group" show-errors>
-							<select class="form-control" id="registerFormBirthday" name="registerFormBirthday" ng-model="ctrl.registration.birthday">
-					      <option></option>
-					      <option ng-repeat="day in ctrl.days" value="{{::day}}">{{::day}}</option>
-					    </select>
-						</div>
-					</div>
-		  		<div class="col-xs-4">
-						<div class="form-group" show-errors>
-							<select class="form-control" id="registerFormBirthmonth" name="registerFormBirthmonth" ng-model="ctrl.registration.birthmonth">
-					      <option></option>
-					      <option ng-repeat="month in ctrl.months" value="{{::month}}">{{::month}}</option>
-					    </select>
-						</div>
-					</div>
-					<div class="col-xs-4">
-						<div class="form-group" show-errors>
-							<select class="form-control" id="registerFormBirthyear" name="registerFormBirthyear" ng-model="ctrl.registration.birthyear" required>
-					      <option></option>
-					      <option ng-repeat="year in ctrl.years" value="{{::year}}">{{::year}}</option>
-					    </select>
-						</div>
-					</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+			    <label for="registerFormImagege">Image</label>
 				</div>
-			</div>
-			<div class="col-sm-2">
-				<label for="registerFormFirstname">Catégorie d'âge</label>
-				<div class="form-control-static">{{ctrl.category}}</div>
 			</div>
 		</div>
 	</fieldset>
@@ -128,19 +159,19 @@
 		<legend>Adresse</legend>
 		<div class="form-group" show-errors>
 			<label for="registerFormAddressAddress">Rue et numéro</label>
-			<input type="text" class="form-control" id="registerFormAddressAddress" name="registerFormAddressAddress" ng-model="ctrl.registration.address.address" required>
+			<input type="text" class="form-control" id="registerFormAddressAddress" name="registerFormAddressAddress" ng-model="ctrl.registration.address.address">
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group" show-errors>
 			    <label for="registerFormAddressPostcode">Code postal</label>
-					<input type="text" class="form-control" id="registerFormAddressPostcode" name="registerFormAddressPostcode" ng-model="ctrl.registration.address.postcode" required>
+					<input type="text" class="form-control" id="registerFormAddressPostcode" name="registerFormAddressPostcode" ng-model="ctrl.registration.address.postcode">
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group" show-errors>
 			    <label for="registerFormAddressCity">Ville</label>
-					<input type="text" class="form-control" id="registerFormAddressCity" name="registerFormAddressCity" ng-model="ctrl.registration.address.city" required>
+					<input type="text" class="form-control" id="registerFormAddressCity" name="registerFormAddressCity" ng-model="ctrl.registration.address.city">
 				</div>
 			</div>
 		</div>
@@ -163,7 +194,7 @@
 		    <div class="col-xs-6">
 		      <div class="form-group" show-errors>
 		        <label for="registerFormContatcts{{key}}Label">Label</label>
-		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Label" name="registerFormContatcts{{key}}Label" ng-model="contact.label" required>
+		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Label" name="registerFormContatcts{{key}}Label" ng-model="contact.label">
 		      </div>
 		    </div>
 		  </div>
@@ -172,13 +203,13 @@
 		    <div class="col-sm-6">
 		      <div class="form-group" show-errors>
 		        <label for="registerFormContatcts{{key}}Firstname">Prénom</label>
-		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Firstname" name="registerFormContatcts{{key}}Firstname" ng-model="contact.firstname" required>
+		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Firstname" name="registerFormContatcts{{key}}Firstname" ng-model="contact.firstname">
 		      </div>
 		    </div>
 		    <div class="col-sm-6">
 		      <div class="form-group" show-errors>
 		        <label for="registerFormContatcts{{key}}Lastname">Nom</label>
-		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Lastname" name="registerFormContatcts{{key}}Lastname" ng-model="contact.lastname" required>
+		        <input type="text" class="form-control" id="registerFormContatcts{{key}}Lastname" name="registerFormContatcts{{key}}Lastname" ng-model="contact.lastname">
 		      </div>
 		    </div>
 		  </div>
@@ -221,7 +252,7 @@
   		<div class="col-sm-6">
 				<div class="form-group" show-errors>
 			    <label for="registerFormFirstname">Moyen de paiement</label>
-					<select class="form-control" id="registerFormPaymentMethod" name="registerFormPaymentMethod" ng-model="ctrl.registration.payment.method" required>
+					<select class="form-control" id="registerFormPaymentMethod" name="registerFormPaymentMethod" ng-model="ctrl.registration.payment.method">
 						<option></option>
 						<option value="check">Chèque</option>
 						<option value="cash">Liquide</option>
