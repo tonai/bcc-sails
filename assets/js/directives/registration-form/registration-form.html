@@ -1,6 +1,11 @@
 <formula-datasource formulas="formulas" categories="categories"></formula-datasource>
 <country-datasource countries="countries"></country-datasource>
-<form id="registration-form" ng-submit="ctrl.edit(ctrl.registration)" ng-class="{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}">
+<form
+  id="registrationForm"
+	name="registrationForm"
+	ng-submit="ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted)"
+	ng-class="{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}"
+>
 
 	<fieldset>
 		<legend>Général</legend>
@@ -148,8 +153,43 @@
 				</div>
 			</div>
 			<div class="col-sm-6">
-				<div class="form-group">
-			    <label for="registerFormImagege">Image</label>
+				<div class="media">
+				  <div class="media-body">
+						<div class="form-group">
+					    <label for="registerFormFile">Image</label>
+							<input
+							  type="file"
+								class="form-control"
+								id="registerFormFile"
+								ngf-select
+								ng-model="ctrl.file"
+								name="registerFormFile"
+	              accept="image/*"
+								ngf-max-size="10MB"
+	              ngf-model-invalid="ctrl.errorFile"
+							/>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-7">
+									<div class="alert alert-danger" role="alert" ng-if="ctrl.errorFile" ng-switch="ctrl.errorFile.$error">
+										<span ng-switch-when="maxSize">Fichier trop volumineux : {{ctrl.errorFile.size / 1000000 | number:1}}Mo (max 10Mo)</span>
+									</div>
+									<div class="alert alert-info" role="alert" ng-if="ctrl.fileDeleted">
+										Validez le formulaire pour confirmer la suppression.
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<button class="btn btn-danger pull-right" ng-click="ctrl.file = null" ng-if="ctrl.file">Supprimer</button>
+									<button class="btn btn-danger pull-right" ng-click="ctrl.fileDeleted = true" ng-if="!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image">Supprimer</button>
+								</div>
+							</div>
+						</div>
+				  </div>
+				  <div class="media-right">
+				    <img class="media-object" alt="Image de vous" ng-show="myForm.file.$valid" ngf-thumbnail="ctrl.file" style="height: 133px;"/>
+				    <img class="media-object" alt="Image de vous" ng-if="!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image" ng-src="/file/get/?name={{ctrl.registration.image}}" style="height: 133px;"/>
+				  </div>
 				</div>
 			</div>
 		</div>
@@ -276,6 +316,6 @@
 			</div>
 		</div>
 	</fieldset>
-	<button type="submit" class="btn btn-primary">{{::ctrl.labels.submit}}</button>
+	<button type="submit" class="btn btn-primary" ng-disabled="!registrationForm.$valid">{{::ctrl.labels.submit}}</button>
 	<a href="#/registrations" class="btn btn-warning" ng-if="ctrl.registration.id">Retour</a>
 </form>

@@ -9,7 +9,7 @@ angular.module('bcc').directive('registrationForm', function(){
     },
 		bindToController: true,
 		controllerAs: 'ctrl',
-		controller: ['$rootScope', '$scope', 'registrationService', 'categoryService', 'seasonService', function($rootScope, $scope, registrationService, categoryService, seasonService){
+		controller: ['$rootScope', '$scope', 'registrationService', 'categoryService', 'seasonService', 'Upload', '$http', function($rootScope, $scope, registrationService, categoryService, seasonService, Upload, $http){
       var i;
       var date = (new Date()).getFullYear();
       var currentSeason = seasonService.getCurrentSeason();
@@ -34,23 +34,68 @@ angular.module('bcc').directive('registrationForm', function(){
         };
       }
 
-      this.edit = function(registration){
+      this.edit = function(registration, file, fileDeleted){
+        var promise = new Promise(function(resolve){
+          resolve();
+        });
+
         if (!registration.id) {
           registration.season = currentSeason.label;
           // Uncomment following line for re-registration.
           //this.registration.confirmed = 1;
         }
-        registrationService.update(registration).then(function(){
-          $rootScope.$broadcast('message', {
-            type: 'success',
-            message: this.labels.message
+
+        if (fileDeleted) {
+          promise = promise.then(this.deleteFile.bind(this, registration));
+        }
+        if (file) {
+          promise = promise.then(this.uploadFile.bind(this, registration, file));
+        }
+
+        return promise
+          .then(registrationService.update.bind(this, registration))
+          .then(function(){
+            $rootScope.$broadcast('message', {
+              type: 'success',
+              message: this.labels.message
+            });
+            if (!registration.id) {
+              this.registration.contacts = {};
+              document.getElementById('registration-form').reset();
+            }
+            this.file = null;
+            $(window).scrollTop(0);
+            $scope.$digest();
+          }.bind(this))
+          .catch(function(error){
+            $rootScope.$broadcast('message', {
+              type: 'danger',
+              message: error
+            });
           });
-          if (!registration.id) {
-            this.registration.contacts = {};
-            document.getElementById('registration-form').reset();
-          }
-          $(window).scrollTop(0);
-        }.bind(this));
+      };
+
+      this.uploadFile = function(registration, file) {
+        return Upload
+          .upload({
+            url: '/file/upload',
+            data: {image: file},
+            objectKey: '.k'
+          })
+          .then(function (response) {
+            registration.image = response.data.file;
+          }, function (response) {
+            if (response.status > 0)
+              throw response.status + ': ' + response.data;
+          });
+      }
+
+      this.deleteFile = function(registration) {
+        return $http.delete('/file/delete/?name=' + registration.image)
+          .then(function() {
+            registration.image = null;
+            return registrationService.update(registration);
+          });
       };
 
       this.addContact = function(){

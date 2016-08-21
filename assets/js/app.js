@@ -14,7 +14,8 @@ angular
     'templates-dist',
     'ui.bootstrap.showErrors',
     'ngSanitize',
-    'ngCsv'
+    'ngCsv',
+    'ngFileUpload'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider

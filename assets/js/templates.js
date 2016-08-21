@@ -176,7 +176,12 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
   $templateCache.put("js/directives/registration-form/registration-form.html",
     "<formula-datasource formulas=\"formulas\" categories=\"categories\"></formula-datasource>\n" +
     "<country-datasource countries=\"countries\"></country-datasource>\n" +
-    "<form id=\"registration-form\" ng-submit=\"ctrl.edit(ctrl.registration)\" ng-class=\"{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}\">\n" +
+    "<form\n" +
+    "  id=\"registrationForm\"\n" +
+    "	name=\"registrationForm\"\n" +
+    "	ng-submit=\"ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted)\"\n" +
+    "	ng-class=\"{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}\"\n" +
+    ">\n" +
     "\n" +
     "	<fieldset>\n" +
     "		<legend>Général</legend>\n" +
@@ -324,8 +329,43 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				</div>\n" +
     "			</div>\n" +
     "			<div class=\"col-sm-6\">\n" +
-    "				<div class=\"form-group\">\n" +
-    "			    <label for=\"registerFormImagege\">Image</label>\n" +
+    "				<div class=\"media\">\n" +
+    "				  <div class=\"media-body\">\n" +
+    "						<div class=\"form-group\">\n" +
+    "					    <label for=\"registerFormFile\">Image</label>\n" +
+    "							<input\n" +
+    "							  type=\"file\"\n" +
+    "								class=\"form-control\"\n" +
+    "								id=\"registerFormFile\"\n" +
+    "								ngf-select\n" +
+    "								ng-model=\"ctrl.file\"\n" +
+    "								name=\"registerFormFile\"\n" +
+    "	              accept=\"image/*\"\n" +
+    "								ngf-max-size=\"10MB\"\n" +
+    "	              ngf-model-invalid=\"ctrl.errorFile\"\n" +
+    "							/>\n" +
+    "						</div>\n" +
+    "						<div class=\"form-group\">\n" +
+    "							<div class=\"row\">\n" +
+    "								<div class=\"col-sm-7\">\n" +
+    "									<div class=\"alert alert-danger\" role=\"alert\" ng-if=\"ctrl.errorFile\" ng-switch=\"ctrl.errorFile.$error\">\n" +
+    "										<span ng-switch-when=\"maxSize\">Fichier trop volumineux : {{ctrl.errorFile.size / 1000000 | number:1}}Mo (max 10Mo)</span>\n" +
+    "									</div>\n" +
+    "									<div class=\"alert alert-info\" role=\"alert\" ng-if=\"ctrl.fileDeleted\">\n" +
+    "										Validez le formulaire pour confirmer la suppression.\n" +
+    "									</div>\n" +
+    "								</div>\n" +
+    "								<div class=\"col-sm-5\">\n" +
+    "									<button class=\"btn btn-danger pull-right\" ng-click=\"ctrl.file = null\" ng-if=\"ctrl.file\">Supprimer</button>\n" +
+    "									<button class=\"btn btn-danger pull-right\" ng-click=\"ctrl.fileDeleted = true\" ng-if=\"!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image\">Supprimer</button>\n" +
+    "								</div>\n" +
+    "							</div>\n" +
+    "						</div>\n" +
+    "				  </div>\n" +
+    "				  <div class=\"media-right\">\n" +
+    "				    <img class=\"media-object\" alt=\"Image de vous\" ng-show=\"myForm.file.$valid\" ngf-thumbnail=\"ctrl.file\" style=\"height: 133px;\"/>\n" +
+    "				    <img class=\"media-object\" alt=\"Image de vous\" ng-if=\"!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image\" ng-src=\"/file/get/?name={{ctrl.registration.image}}\" style=\"height: 133px;\"/>\n" +
+    "				  </div>\n" +
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
@@ -452,7 +492,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			</div>\n" +
     "		</div>\n" +
     "	</fieldset>\n" +
-    "	<button type=\"submit\" class=\"btn btn-primary\">{{::ctrl.labels.submit}}</button>\n" +
+    "	<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!registrationForm.$valid\">{{::ctrl.labels.submit}}</button>\n" +
     "	<a href=\"#/registrations\" class=\"btn btn-warning\" ng-if=\"ctrl.registration.id\">Retour</a>\n" +
     "</form>\n" +
     "");
