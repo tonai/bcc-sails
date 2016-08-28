@@ -42,7 +42,6 @@ angular.module('bcc').directive('registrationList', function(){
         registration.ageCategory = categoryService.getCategory(registration.birthyear, currentSeason);
         this.registrations.push(registration);
         this.addCsv(registration);
-        console.log(this.csvData);
         $scope.$digest();
       }
 

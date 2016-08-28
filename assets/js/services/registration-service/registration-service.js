@@ -68,7 +68,6 @@ angular.module('bcc').factory('registrationService', ['$rootScope', '$q', '$http
 
   api.disconnect = function(){
     offline = true;
-    console.log('disconnect');
     $rootScope.$broadcast('message', {
       type: 'warning',
       message: 'Vous êtes maintenant hors ligne.'
