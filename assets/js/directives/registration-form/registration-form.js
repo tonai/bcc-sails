@@ -58,10 +58,10 @@ angular.module('bcc').directive('registrationForm', function(){
             $rootScope.$broadcast('message', {
               type: 'success',
               message: this.labels.message
-            });
+            }, true);
             if (!registration.id) {
               this.registration.contacts = {};
-              document.getElementById('registration-form').reset();
+              document.getElementById('registrationForm').reset();
             }
             this.file = null;
             $(window).scrollTop(0);
@@ -70,8 +70,8 @@ angular.module('bcc').directive('registrationForm', function(){
           .catch(function(error){
             $rootScope.$broadcast('message', {
               type: 'danger',
-              message: error
-            });
+              message: error.message ? error.message : error
+            }, true);
           });
       };
 
@@ -105,7 +105,6 @@ angular.module('bcc').directive('registrationForm', function(){
       };
 
       this.removeContact = function(index){
-        console.log(index, this.registration.contacts);
         delete this.registration.contacts[index];
       };
 
