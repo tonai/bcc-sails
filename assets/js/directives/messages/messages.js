@@ -15,10 +15,17 @@ angular.module('bcc').directive('messages', function(){
         this.messages.length && this.dismiss(0);
         this.messages.push(data);
         digest && $scope.$digest();
+        setTimeout(function(data){
+          this.dismiss(data);
+          digest && $scope.$digest();
+        }.bind(this, data), 5000);
       };
 
-      this.dismiss = function(index) {
-        this.messages.splice(index, 1);
+      this.dismiss = function(message) {
+        var index = this.messages.indexOf(message);
+        if (index !== -1) {
+          this.messages.splice(index, 1);
+        }
       };
 
       // Initialization.

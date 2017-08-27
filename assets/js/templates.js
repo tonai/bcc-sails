@@ -23,7 +23,7 @@ angular.module("js/directives/messages/messages.html", []).run(["$templateCache"
   $templateCache.put("js/directives/messages/messages.html",
     "<div class=\"messages\">\n" +
     "  <div ng-repeat=\"message in ctrl.messages\" class=\"alert alert-{{message.type}}\" role=\"alert\">\n" +
-    "    <button type=\"button\" class=\"close\" aria-label=\"Close\" ng-click=\"ctrl.dismiss($index)\">\n" +
+    "    <button type=\"button\" class=\"close\" aria-label=\"Close\" ng-click=\"ctrl.dismiss(message)\">\n" +
     "      <span aria-hidden=\"true\">&times;</span>\n" +
     "    </button>\n" +
     "    {{message.message}}\n" +
