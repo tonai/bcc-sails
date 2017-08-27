@@ -32,9 +32,17 @@ angular.module('bcc').directive('registrationForm', function(){
           submit: 'Ajouter l\'inscription',
           message: 'Inscription créée.'
         };
+        this.registration = getDefaultRegistration();
       }
 
-      this.edit = function(registration, file, fileDeleted){
+      function getDefaultRegistration() {
+        return {
+          category: 'adult',
+          country: 'FR'
+        };
+      };
+
+      this.edit = function(registration, file, fileDeleted, form){
         var promise = new Promise(function(resolve){
           resolve();
         });
@@ -60,8 +68,10 @@ angular.module('bcc').directive('registrationForm', function(){
               message: this.labels.message
             }, true);
             if (!registration.id) {
-              this.registration.contacts = {};
-              document.getElementById('registrationForm').reset();
+              form.$setPristine();
+              form.$setUntouched();
+              this.registration = getDefaultRegistration();
+              $scope.$broadcast('show-errors-reset');
             }
             this.file = null;
             $(window).scrollTop(0);

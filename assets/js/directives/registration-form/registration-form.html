@@ -3,8 +3,9 @@
 <form
   id="registrationForm"
 	name="registrationForm"
-	ng-submit="ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted)"
+	ng-submit="ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted, registrationForm)"
 	ng-class="{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}"
+  novalidate
 >
 
 	<fieldset>
@@ -86,7 +87,7 @@
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group" show-errors>
-			    <label for="registerFormCountry">Pays</label>
+			    <label for="registerFormCountry">Nationalité</label>
 					<select class="form-control" id="registerFormCountry" name="registerFormCountry" ng-model="ctrl.registration.country">
 						<option></option>
 						<option ng-repeat="country in countries" value="{{country.code}}">{{country.name}}</option>
@@ -147,12 +148,8 @@
 						<div class="form-control-static">{{ctrl.category}}</div>
 					</div>
 				</div>
-				<div class="form-group" show-errors>
-			    <label for="registerFormFirstname">N° de licence</label>
-					<input type="text" class="form-control" id="registerFormLicence" name="registerFormLicence" ng-model="ctrl.registration.licence">
-				</div>
 			</div>
-			<div class="col-sm-6">
+			<!--div class="col-sm-6">
 				<div class="media">
 				  <div class="media-body">
 						<div class="form-group">
@@ -191,7 +188,13 @@
 				    <img class="media-object" alt="Image de vous" ng-if="!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image" ng-src="/file/get/?name={{ctrl.registration.image}}" style="height: 133px;"/>
 				  </div>
 				</div>
-			</div>
+			</div-->
+      <div class="col-sm-6">
+				<div class="form-group" show-errors>
+			    <label for="registerFormFirstname">N° de licence</label>
+					<input type="text" class="form-control" id="registerFormLicence" name="registerFormLicence" ng-model="ctrl.registration.licence">
+				</div>
+      </div>
 		</div>
 	</fieldset>
 

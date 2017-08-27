@@ -88,22 +88,26 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
     "<div class=\"registration-counter\">\n" +
     "  <formula-datasource formulas=\"ctrl.formulas\" categories=\"ctrl.categories\"></formula-datasource>\n" +
     "  <div class=\"registration-counter__panel\">\n" +
-    "    <div class=\"registration-counter__box panel panel-default\" ng-repeat=\"formula in ctrl.formulas | filter:{category:'young'}\" id=\"panel-{{::formula.id}}\">\n" +
+    "    <div\n" +
+    "      class=\"registration-counter__box panel panel-default\"\n" +
+    "      ng-repeat=\"formula in ctrl.formulas | filter:{category:'young'}\"\n" +
+    "      id=\"panel-{{::formula.id}}\"\n" +
+    "    >\n" +
     "      <div class=\"panel-heading\">\n" +
     "        <span title=\"{{::formula.label}}\">{{::formula.id}}</span>\n" +
     "      </div>\n" +
     "      <div class=\"panel-body\">\n" +
     "        <div class=\"progress\">\n" +
-    "          <span class=\"badge\">{{ctrl.counters[formula.id] || 0}} / {{::formula.limit}}</span>\n" +
+    "          <span class=\"badge\">{{(formula.counter + ctrl.counters[formula.id])}} / {{::formula.limit}}</span>\n" +
     "          <div\n" +
     "            class=\"progress-bar progress-bar-success\"\n" +
-    "            ng-class=\"{'progress-bar-warning': (ctrl.counters[formula.id] || 0) / formula.limit > 0.5,\n" +
-    "                       'progress-bar-danger': (ctrl.counters[formula.id] || 0) / formula.limit > 0.8}\"\n" +
+    "            ng-class=\"{'progress-bar-warning': (formula.counter + ctrl.counters[formula.id]) / formula.limit > 0.5,\n" +
+    "                       'progress-bar-danger': formula.limit == 0 || (formula.counter + ctrl.counters[formula.id]) / formula.limit > 0.8}\"\n" +
     "            role=\"progressbar\"\n" +
-    "            aria-valuenow=\"{{ctrl.counters[formula.id] || 0}}\"\n" +
+    "            aria-valuenow=\"{{(formula.counter + ctrl.counters[formula.id])}}\"\n" +
     "            aria-valuemin=\"0\"\n" +
     "            aria-valuemax=\"{{::formula.limit}}\"\n" +
-    "            style=\"width: {{(ctrl.counters[formula.id] || 0) / formula.limit * 100}}%\"\n" +
+    "            style=\"width: {{formula.limit ? (formula.counter + ctrl.counters[formula.id]) / formula.limit * 100 : 100}}%\"\n" +
     "          ></div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -114,14 +118,14 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
     "      </div>\n" +
     "      <div class=\"panel-body\">\n" +
     "        <div class=\"progress\">\n" +
-    "          <span class=\"badge\">{{ctrl.counters.young || 0}} / {{::ctrl.categories.young.limit}}</span>\n" +
+    "          <span class=\"badge\">{{(ctrl.categories.young.counter + ctrl.counters.young)}} / {{::ctrl.categories.young.limit}}</span>\n" +
     "          <div\n" +
     "            class=\"progress-bar\"\n" +
     "            role=\"progressbar\"\n" +
-    "            aria-valuenow=\"{{ctrl.counters.young || 0}}\"\n" +
+    "            aria-valuenow=\"{{(ctrl.categories.young.counter + ctrl.counters.young)}}\"\n" +
     "            aria-valuemin=\"0\"\n" +
     "            aria-valuemax=\"{{::ctrl.categories.young.limit}}\"\n" +
-    "            style=\"width: {{(ctrl.counters.young || 0) / ctrl.categories.young.limit * 100}}%\"\n" +
+    "            style=\"width: {{(ctrl.categories.young.counter + ctrl.counters.young) / ctrl.categories.young.limit * 100}}%\"\n" +
     "          ></div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -129,22 +133,26 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
     "  </div>\n" +
     "\n" +
     "  <div class=\"registration-counter__panel\">\n" +
-    "    <div class=\"registration-counter__box panel panel-default\" ng-repeat=\"formula in ctrl.formulas | filter:{category:'adult'}\" id=\"panel-{{::formula.id}}\">\n" +
+    "    <div\n" +
+    "      class=\"registration-counter__box panel panel-default\"\n" +
+    "      ng-repeat=\"formula in ctrl.formulas | filter:{category:'adult'}\"\n" +
+    "      id=\"panel-{{::formula.id}}\"\n" +
+    "    >\n" +
     "      <div class=\"panel-heading\">\n" +
     "        <span title=\"{{::formula.label}}\">{{::formula.id}}</span>\n" +
     "      </div>\n" +
     "      <div class=\"panel-body\">\n" +
     "        <div class=\"progress\">\n" +
-    "          <span class=\"badge\">{{ctrl.counters[formula.id] || 0}} / {{::formula.limit}}</span>\n" +
+    "          <span class=\"badge\">{{(formula.counter + ctrl.counters[formula.id])}} / {{::formula.limit}}</span>\n" +
     "          <div\n" +
     "            class=\"progress-bar progress-bar-success\"\n" +
-    "            ng-class=\"{'progress-bar-warning': (ctrl.counters[formula.id] || 0) / formula.limit > 0.5,\n" +
-    "                       'progress-bar-danger': (ctrl.counters[formula.id] || 0) / formula.limit > 0.8}\"\n" +
+    "            ng-class=\"{'progress-bar-warning': (formula.counter + ctrl.counters[formula.id]) / formula.limit > 0.5,\n" +
+    "                       'progress-bar-danger': formula.limit == 0 || (formula.counter + ctrl.counters[formula.id]) / formula.limit > 0.8}\"\n" +
     "            role=\"progressbar\"\n" +
-    "            aria-valuenow=\"{{ctrl.counters[formula.id] || 0}}\"\n" +
+    "            aria-valuenow=\"{{(formula.counter + ctrl.counters[formula.id])}}\"\n" +
     "            aria-valuemin=\"0\"\n" +
     "            aria-valuemax=\"{{::formula.limit}}\"\n" +
-    "            style=\"width: {{(ctrl.counters[formula.id] || 0) / formula.limit * 100}}%\"\n" +
+    "            style=\"width: {{formula.limit ? (formula.counter + ctrl.counters[formula.id]) / formula.limit * 100 : 100}}%\"\n" +
     "          ></div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -155,14 +163,14 @@ angular.module("js/directives/registration-counter/registration-counter.html", [
     "      </div>\n" +
     "      <div class=\"panel-body\">\n" +
     "        <div class=\"progress\">\n" +
-    "          <span class=\"badge\">{{ctrl.counters.adult || 0}} / {{::ctrl.categories.adult.limit}}</span>\n" +
+    "          <span class=\"badge\">{{(ctrl.categories.adult.counter + ctrl.counters.adult)}} / {{::ctrl.categories.adult.limit}}</span>\n" +
     "          <div\n" +
     "            class=\"progress-bar\"\n" +
     "            role=\"progressbar\"\n" +
-    "            aria-valuenow=\"{{ctrl.counters.adult || 0}}\"\n" +
+    "            aria-valuenow=\"{{(ctrl.categories.adult.counter + ctrl.counters.adult)}}\"\n" +
     "            aria-valuemin=\"0\"\n" +
     "            aria-valuemax=\"{{::ctrl.categories.adult.limit}}\"\n" +
-    "            style=\"width: {{(ctrl.counters.adult || 0) / ctrl.categories.adult.limit * 100}}%\"\n" +
+    "            style=\"width: {{(ctrl.categories.adult.counter + ctrl.counters.adult) / ctrl.categories.adult.limit * 100}}%\"\n" +
     "          ></div>\n" +
     "        </div>\n" +
     "      </div>\n" +
@@ -179,8 +187,9 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "<form\n" +
     "  id=\"registrationForm\"\n" +
     "	name=\"registrationForm\"\n" +
-    "	ng-submit=\"ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted)\"\n" +
+    "	ng-submit=\"ctrl.edit(ctrl.registration, ctrl.file, ctrl.fileDeleted, registrationForm)\"\n" +
     "	ng-class=\"{'registration-form--edit': ctrl.registration.id, 'registration-form--add': !ctrl.registration.id}\"\n" +
+    "  novalidate\n" +
     ">\n" +
     "\n" +
     "	<fieldset>\n" +
@@ -262,7 +271,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "			</div>\n" +
     "			<div class=\"col-sm-6\">\n" +
     "				<div class=\"form-group\" show-errors>\n" +
-    "			    <label for=\"registerFormCountry\">Pays</label>\n" +
+    "			    <label for=\"registerFormCountry\">Nationalité</label>\n" +
     "					<select class=\"form-control\" id=\"registerFormCountry\" name=\"registerFormCountry\" ng-model=\"ctrl.registration.country\">\n" +
     "						<option></option>\n" +
     "						<option ng-repeat=\"country in countries\" value=\"{{country.code}}\">{{country.name}}</option>\n" +
@@ -323,12 +332,8 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "						<div class=\"form-control-static\">{{ctrl.category}}</div>\n" +
     "					</div>\n" +
     "				</div>\n" +
-    "				<div class=\"form-group\" show-errors>\n" +
-    "			    <label for=\"registerFormFirstname\">N° de licence</label>\n" +
-    "					<input type=\"text\" class=\"form-control\" id=\"registerFormLicence\" name=\"registerFormLicence\" ng-model=\"ctrl.registration.licence\">\n" +
-    "				</div>\n" +
     "			</div>\n" +
-    "			<div class=\"col-sm-6\">\n" +
+    "			<!--div class=\"col-sm-6\">\n" +
     "				<div class=\"media\">\n" +
     "				  <div class=\"media-body\">\n" +
     "						<div class=\"form-group\">\n" +
@@ -367,7 +372,13 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				    <img class=\"media-object\" alt=\"Image de vous\" ng-if=\"!ctrl.file && !ctrl.fileDeleted && ctrl.registration.image\" ng-src=\"/file/get/?name={{ctrl.registration.image}}\" style=\"height: 133px;\"/>\n" +
     "				  </div>\n" +
     "				</div>\n" +
-    "			</div>\n" +
+    "			</div-->\n" +
+    "      <div class=\"col-sm-6\">\n" +
+    "				<div class=\"form-group\" show-errors>\n" +
+    "			    <label for=\"registerFormFirstname\">N° de licence</label>\n" +
+    "					<input type=\"text\" class=\"form-control\" id=\"registerFormLicence\" name=\"registerFormLicence\" ng-model=\"ctrl.registration.licence\">\n" +
+    "				</div>\n" +
+    "      </div>\n" +
     "		</div>\n" +
     "	</fieldset>\n" +
     "\n" +

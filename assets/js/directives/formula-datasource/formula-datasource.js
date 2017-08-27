@@ -17,64 +17,102 @@ angular.module('bcc').directive('formulaDatasource', function(){
 
       this.formulas = [
         {
-          id: 'JL',
+          id: 'MB1',
           category: 'young',
-          label: 'Jeunes loisirs',
-          limit: 2
+          label: 'Mini bad mercredi',
+          limit: 16,
+          counter: 0
+        },
+        {
+          id: 'MB2',
+          category: 'young',
+          label: 'Mini bad samedi',
+          limit: 16,
+          counter: 2
+        },
+        {
+          id: 'JL1',
+          category: 'young',
+          label: 'Loisirs 9-13 ans',
+          limit: 30,
+          counter: 0
+        },
+        {
+          id: 'JL2',
+          category: 'young',
+          label: 'Loisirs 14-18',
+          limit: 30,
+          counter: 0
         },
         {
           id: 'JC1',
           category: 'young',
-          label: 'Jeunes compétiteurs 1',
-          limit: 3
+          label: 'Compétiteurs 9-13 ans',
+          limit: 30,
+          counter: 0
         },
         {
           id: 'JC2',
           category: 'young',
-          label: 'Jeunes compétiteurs 2',
-          limit: 5
+          label: 'Compétiteurs 14-18',
+          limit: 30,
+          counter: 0
         },
         {
-          id: '1A',
+          id: 'FA1',
           category: 'adult',
           label: 'Adultes AS 19h30',
-          limit: 6
+          limit: 50,
+          counter: 53
         },
         {
-          id: '1B',
+          id: 'FA2',
           category: 'adult',
           label: 'Adultes AS 21h',
-          limit: 3
+          limit: 50,
+          counter: 36
         },
         {
-          id: '2A',
+          id: 'FB1',
           category: 'adult',
           label: 'Adultes JPR 19h30',
-          limit: 6
+          limit: 25,
+          counter: 14
         },
         {
-          id: '2B',
+          id: 'FB2',
           category: 'adult',
           label: 'Adultes JPR 21h',
-          limit: 7
+          limit: 25,
+          counter: 9
         },
         {
-          id: '3A',
+          id: 'FC1',
           category: 'adult',
-          label: 'Adultes CD intermédiaires à confirmés',
-          limit: 6
+          label: 'Adultes CD 19h30',
+          limit: 50,
+          counter: 19
         },
         {
-          id: '3B',
+          id: 'FC2',
           category: 'adult',
-          label: 'Adultes CD débutants à intermédiaires',
-          limit: 4
+          label: 'Adultes CD 21h',
+          limit: 50,
+          counter: 6
         },
         {
-          id: '4',
+          id: 'FD',
           category: 'adult',
           label: 'Adultes compétiteurs',
-          limit: 2
+          limit: 50,
+          counter: 0
+        },
+        {
+          id: 'FE',
+          category: 'adult',
+          label: 'Adultes week-end',
+          limit: 30,
+          counter: 4
         }
       ];
 
@@ -82,9 +120,11 @@ angular.module('bcc').directive('formulaDatasource', function(){
       this.formulas.forEach(function(formula){
         this.categories[formula.category] = this.categories[formula.category] || {
           limit: 0,
-          label: labels[formula.category]
+          label: labels[formula.category],
+          counter: 0
         };
         this.categories[formula.category].limit += formula.limit;
+        this.categories[formula.category].counter += formula.counter;
       }.bind(this));
 		}
 	};

@@ -21,6 +21,7 @@
     "angular-bootstrap-show-errors": "~2.3.0",
     "angular-sanitize": "^1.5.8",
     "ng-csv": "^0.3.6",
-    "ng-file-upload": "^12.0.4"
+    "ng-file-upload": "^12.0.4",
+    "angular-bootstrap": "^2.1.3"
   }
 }

@@ -34,6 +34,7 @@ var jsFilesToInject = [
   'bower_components/angular-sanitize/angular-sanitize.min.js',
   'bower_components/ng-csv/build/ng-csv.min.js',
   'bower_components/ng-file-upload/ng-file-upload.min.js',
+  'bower_components/angular-bootstrap/ui-bootstrap.min.js',
 
 
   'js/dependencies/sails.io.js',
