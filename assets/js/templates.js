@@ -382,7 +382,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "		</div>\n" +
     "	</fieldset>\n" +
     "\n" +
-    "	<fieldset>\n" +
+    "	<!--fieldset>\n" +
     "		<legend>Adresse</legend>\n" +
     "		<div class=\"form-group\" show-errors>\n" +
     "			<label for=\"registerFormAddressAddress\">Rue et numéro</label>\n" +
@@ -402,9 +402,9 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</fieldset>\n" +
+    "	</fieldset-->\n" +
     "\n" +
-    "	<fieldset>\n" +
+    "	<!--fieldset>\n" +
     "		<legend>Contacts</legend>\n" +
     "		<div class=\"form-group\">\n" +
     "			<button type=\"button\" class=\"btn btn-success\" ng-click=\"ctrl.addContact()\">\n" +
@@ -456,9 +456,9 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</fieldset>\n" +
+    "	</fieldset-->\n" +
     "\n" +
-    "	<fieldset>\n" +
+    "	<!--fieldset>\n" +
     "		<legend>Paiement</legend>\n" +
     "		<div class=\"row\">\n" +
     "  		<div class=\"col-sm-6\">\n" +
@@ -502,7 +502,7 @@ angular.module("js/directives/registration-form/registration-form.html", []).run
     "				</div>\n" +
     "			</div>\n" +
     "		</div>\n" +
-    "	</fieldset>\n" +
+    "	</fieldset-->\n" +
     "	<button type=\"submit\" class=\"btn btn-primary\" ng-disabled=\"!registrationForm.$valid\">{{::ctrl.labels.submit}}</button>\n" +
     "	<a href=\"#/registrations\" class=\"btn btn-warning\" ng-if=\"ctrl.registration.id\">Retour</a>\n" +
     "</form>\n" +

@@ -21,7 +21,7 @@ angular.module('bcc').directive('formulaDatasource', function(){
           category: 'young',
           label: 'Mini bad mercredi',
           limit: 16,
-          counter: 0
+          counter: 4
         },
         {
           id: 'MB2',
@@ -35,84 +35,84 @@ angular.module('bcc').directive('formulaDatasource', function(){
           category: 'young',
           label: 'Loisirs 9-13 ans',
           limit: 30,
-          counter: 0
+          counter: 10
         },
         {
           id: 'JL2',
           category: 'young',
           label: 'Loisirs 14-18',
           limit: 30,
-          counter: 0
+          counter: 17
         },
         {
           id: 'JC1',
           category: 'young',
           label: 'Compétiteurs 9-13 ans',
-          limit: 30,
-          counter: 0
+          limit: 21,
+          counter: 19
         },
         {
           id: 'JC2',
           category: 'young',
           label: 'Compétiteurs 14-18',
-          limit: 30,
-          counter: 0
+          limit: 21,
+          counter: 18
         },
         {
-          id: 'FA1',
+          id: 'F1A',
           category: 'adult',
           label: 'Adultes AS 19h30',
-          limit: 50,
-          counter: 53
+          limit: 56,
+          counter: 52
         },
         {
-          id: 'FA2',
+          id: 'F1B',
           category: 'adult',
           label: 'Adultes AS 21h',
-          limit: 50,
-          counter: 36
+          limit: 56,
+          counter: 29
         },
         {
-          id: 'FB1',
+          id: 'F0A',
           category: 'adult',
           label: 'Adultes JPR 19h30',
-          limit: 25,
-          counter: 14
+          limit: 24,
+          counter: 24
         },
         {
-          id: 'FB2',
+          id: 'F0B',
           category: 'adult',
           label: 'Adultes JPR 21h',
-          limit: 25,
-          counter: 9
+          limit: 24,
+          counter: 12
         },
         {
-          id: 'FC1',
+          id: 'F0C',
           category: 'adult',
           label: 'Adultes CD 19h30',
           limit: 50,
-          counter: 19
+          counter: 25
         },
         {
-          id: 'FC2',
+          id: 'F0D',
           category: 'adult',
           label: 'Adultes CD 21h',
           limit: 50,
-          counter: 6
+          counter: 5
         },
         {
-          id: 'FD',
+          id: 'F2',
           category: 'adult',
           label: 'Adultes compétiteurs',
-          limit: 50,
-          counter: 0
+          limit: 46,
+          counter: 46
         },
         {
-          id: 'FE',
+          id: 'FWE',
           category: 'adult',
           label: 'Adultes week-end',
           limit: 30,
-          counter: 4
+          counter: 7
         }
       ];
 
